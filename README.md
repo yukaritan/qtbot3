@@ -41,7 +41,7 @@ This has only been tested on Python 3.4.
 
 
 ## License
-Doubly licensed under GPL v3 and NBPL; see license1.txt ańd license2.txt.
+Doubly licensed under GPL v3 and NBPL; see license1.txt and license2.txt.
 
 
 ## Enjoy
