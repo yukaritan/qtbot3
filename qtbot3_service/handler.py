@@ -16,7 +16,6 @@ from plugins import rainbow
 #  Hooks
 #
 
-
 @hook('message')
 def handle_message(message: Message, nick: str):
     try:
