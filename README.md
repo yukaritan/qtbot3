@@ -20,9 +20,10 @@ It connects to IRC. You need a couple more files for it to work.
 
 
 ## Requirements
-1. Gunicorn
-2. Flask
-3. Other things. Please let me know what it has you install.
+1. Python 3.4
+2. Gunicorn
+3. Flask
+4. Other things. Please let me know what it has you install.
 
 
 ## Run
