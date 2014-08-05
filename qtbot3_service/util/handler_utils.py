@@ -27,11 +27,11 @@ def msghook(regex):
 
 def remember_user(fn):
     """Remember a user"""
-    def wrapper(message: Message, match, nick: str):
+    def wrapper(message: Message, nick: str):
         print("This feature is not implemented,"
               "but at some point in the future,"
-              "the bot will remember who {nick} is")
-        return fn
+              "the bot will remember who {nick} is".format(nick=message.nick))
+        return fn(message, nick)
     return wrapper
 
 
