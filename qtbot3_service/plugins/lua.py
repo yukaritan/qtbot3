@@ -41,7 +41,7 @@ def get_sandbox() -> lupa.LuaRuntime:
     return sandbox
 
 
-@msghook('eval (?P<code>.*)')
+@msghook('evalr (?P<code>.*)')
 @authenticate
 def join(message: Message, match, nick: str) -> str:
     """pull some impressive lua stunts"""
@@ -51,6 +51,24 @@ def join(message: Message, match, nick: str) -> str:
 
     try:
         function = get_sandbox().eval('function() return ' + code + ' end')
+        result = '\r\n'.join(str(function()).splitlines())
+    except Exception as ex:
+        result = '\r\n'.join(str(ex).splitlines())
+
+    target = get_target(message, nick)
+    return irc.chat_message(target, result)
+
+
+@msghook('eval (?P<code>.*)')
+@authenticate
+def join(message: Message, match, nick: str) -> str:
+    """pull some impressive lua stunts"""
+
+    code = match['code']
+    print("received lua code from {nick}: {code}".format(nick=nick, code=code))
+
+    try:
+        function = get_sandbox().eval('function() ' + code + ' end')
         result = '\r\n'.join(str(function()).splitlines())
     except Exception as ex:
         result = '\r\n'.join(str(ex).splitlines())
