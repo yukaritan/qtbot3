@@ -4,11 +4,11 @@ It connects to IRC. You need a couple more files for it to work.
 1. "qtbot3_bot/settings.json":
 
     `{
-    "server": "irc.freenode.net",
-    "nick": "qtbot3",
-    "port": 6667,
-    "service_host": "localhost",
-    "service_port": 4000
+        "server": "irc.freenode.net",
+        "nick": "qtbot3",
+        "port": 6667,
+        "service_host": "localhost",
+        "service_port": 4000
     }`
 
 2. "qtbot3_service/settings.json":
@@ -25,7 +25,8 @@ It connects to IRC. You need a couple more files for it to work.
 1. Python 3.4
 2. Gunicorn
 3. Flask
-4. Other things. Please let me know what it has you install.
+4. Lupa
+5. Other things. Please let me know what it has you install.
 
 
 ## Run
