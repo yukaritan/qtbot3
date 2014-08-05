@@ -1,5 +1,5 @@
 import util.irc as irc
-from util.handler_utils import hook, hooks, message_hooks
+from util.handler_utils import hook, hooks, message_hooks, remember_user
 from util.linetypes import LINE_TYPES
 from util.message import Message
 from util.settings import get_setting
@@ -19,6 +19,7 @@ from plugins import rainbow
 #
 
 @hook('message')
+@remember_user
 def handle_message(message: Message, nick: str):
     try:
         if message.nick == nick:
@@ -36,6 +37,7 @@ def handle_message(message: Message, nick: str):
 
 
 @hook('server_mode')
+@remember_user
 def handle_action(message: Message, nick: str):
     print('got server_mode:', message.members)
     return irc.chat_message('NickServ', 'identify ' + get_setting('identify'))
@@ -49,6 +51,7 @@ def handle_action(message: Message, nick: str):
 
 
 @hook('join')
+@remember_user
 def handle_join(message: Message, nick: str):
     if message.nick == nick:
         return
