@@ -42,6 +42,8 @@ def handle_action(message: Message, nick: str):
     return irc.chat_message('NickServ', 'identify ' + get_setting('identify'))
 
 
+# I can't implement this until there's a way to tie users to their respective nicks
+#
 # @hook('notice')
 # def handle_notice(message: Message, nick: str):
 #     print('notice:', message.members)
