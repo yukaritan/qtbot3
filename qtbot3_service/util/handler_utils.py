@@ -27,18 +27,13 @@ def msghook(regex):
 
 def remember_user(fn):
     """Remember a user"""
-    return fn
 
-    try:
-        def wrapper(message: Message, match, nick: str):
-            print("This feature is not implemented,"
-                  "but at some point in the future,"
-                  "the bot will remember who {nick} is".format(nick=message.nick))
-            return fn(message, match, nick)
-        return wrapper
-    except Exception as ex:
-        print("remember_user exception:", ex)
-    return fn
+    def wrapper(message: Message, match, nick: str):
+        print("This feature is not implemented,"
+              "but at some point in the future,"
+              "the bot will remember who {nick} is")
+        return fn(message, match, nick)
+    return wrapper
 
 
 def get_target(message: Message, nick: str) -> str:
