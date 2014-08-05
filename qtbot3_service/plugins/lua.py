@@ -50,7 +50,7 @@ def join(message: Message, match, nick: str) -> str:
     print("received lua code from {nick}: {code}".format(nick=nick, code=code))
 
     try:
-        function = get_sandbox().eval('return ' + code)
+        function = get_sandbox().eval('function() return ' + code + ' end')
         result = '\r\n'.join(str(function()).splitlines())
     except Exception as ex:
         result = '\r\n'.join(str(ex).splitlines())
