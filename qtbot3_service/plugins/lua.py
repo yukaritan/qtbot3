@@ -49,8 +49,11 @@ def join(message: Message, match, nick: str) -> str:
     code = match['code']
     print("received lua code from {nick}: {code}".format(nick=nick, code=code))
 
-    function = get_sandbox().eval('function() ' + code + ' end')
-    result = '\r\n'.join(str(function()).splitlines())
+    try:
+        function = get_sandbox().eval('function() ' + code + ' end')
+        result = '\r\n'.join(str(function()).splitlines())
+    except Exception as ex:
+        result = '\r\n'.join(str(ex).splitlines())
 
     target = get_target(message, nick)
     return irc.chat_message(target, result)
