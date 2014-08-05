@@ -37,7 +37,6 @@ def handle_message(message: Message, nick: str):
 
 
 @hook('server_mode')
-@remember_user
 def handle_action(message: Message, nick: str):
     print('got server_mode:', message.members)
     return irc.chat_message('NickServ', 'identify ' + get_setting('identify'))
