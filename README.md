@@ -2,15 +2,17 @@
 It connects to IRC. You need a couple more files for it to work.
 
 1. "qtbot3_bot/settings.json":
+
     `{
-        "server": "irc.freenode.net",
-        "nick": "qtbot3",
-        "port": 6667,
-        "service_host": "localhost",
-        "service_port": 4000
+    "server": "irc.freenode.net",
+    "nick": "qtbot3",
+    "port": 6667,
+    "service_host": "localhost",
+    "service_port": 4000
     }`
 
 2. "qtbot3_service/settings.json":
+
     `{
         "master": "~you@your_host_here",
         "service_host": "localhost",
