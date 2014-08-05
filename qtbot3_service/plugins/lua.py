@@ -1,3 +1,5 @@
+"""This module is probably dangerous. Use at your own risk."""
+
 from util import irc
 from util.handler_utils import msghook, authenticate, get_target
 from util.message import Message
