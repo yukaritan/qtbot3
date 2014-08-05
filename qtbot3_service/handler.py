@@ -42,10 +42,18 @@ def handle_action(message: Message, nick: str):
 
 
 # @hook('notice')
-# def handle_action(message: Message, nick: str):
+# def handle_notice(message: Message, nick: str):
 #     print('notice:', message.members)
 #     return '\r\n'.join((irc.chat_message(get_master_nick(), 'I got a notice from %s:' % message.nick),
 #                         irc.chat_message(get_master_nick(), message.message)))
+
+
+@hook('join')
+def handle_join(message: Message, nick: str):
+    if message.nick == nick:
+        return
+    print('join:', message.members)
+    return '\r\n'.join(irc.chat_message(message.target, 'hai %s! ^__^' % message.nick))
 
 
 #
