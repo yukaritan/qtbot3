@@ -41,7 +41,7 @@ def get_sandbox() -> lupa.LuaRuntime:
     return sandbox
 
 
-@msghook('lua (?P<code>.*)')
+@msghook('eval (?P<code>.*)')
 @authenticate
 def join(message: Message, match, nick: str) -> str:
     """pull some impressive lua stunts"""
@@ -50,7 +50,7 @@ def join(message: Message, match, nick: str) -> str:
     print("received lua code from {nick}: {code}".format(nick=nick, code=code))
 
     try:
-        function = get_sandbox().eval('function() ' + code + ' end')
+        function = get_sandbox().eval('return ' + code)
         result = '\r\n'.join(str(function()).splitlines())
     except Exception as ex:
         result = '\r\n'.join(str(ex).splitlines())
