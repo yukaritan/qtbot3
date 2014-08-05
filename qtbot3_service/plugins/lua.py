@@ -41,38 +41,32 @@ def get_sandbox() -> lupa.LuaRuntime:
     return sandbox
 
 
+def run_sandbox(template: str, code: str) -> str:
+    try:
+        function = get_sandbox().eval(template.format(code=code))
+        return '\r\n'.join(str(function()).splitlines())
+    except Exception as ex:
+        return '\r\n'.join(str(ex).splitlines())
+
+
 @msghook('evalr (?P<code>.*)')
 @authenticate
-def join(message: Message, match, nick: str) -> str:
-    """pull some impressive lua stunts"""
-
+def lua_evalr(message: Message, match, nick: str) -> str:
+    """evaluate a single statement"""
     code = match['code']
     print("received lua code from {nick}: {code}".format(nick=nick, code=code))
-
-    try:
-        function = get_sandbox().eval('function() return ' + code + ' end')
-        result = '\r\n'.join(str(function()).splitlines())
-    except Exception as ex:
-        result = '\r\n'.join(str(ex).splitlines())
-
+    result = run_sandbox('function() return {code} end', code)
     target = get_target(message, nick)
     return irc.chat_message(target, result)
 
 
 @msghook('eval (?P<code>.*)')
 @authenticate
-def join(message: Message, match, nick: str) -> str:
-    """pull some impressive lua stunts"""
-
+def lua_eval(message: Message, match, nick: str) -> str:
+    """evaluate a series of statements, but you'll have to return"""
     code = match['code']
     print("received lua code from {nick}: {code}".format(nick=nick, code=code))
-
-    try:
-        function = get_sandbox().eval('function() ' + code + ' end')
-        result = '\r\n'.join(str(function()).splitlines())
-    except Exception as ex:
-        result = '\r\n'.join(str(ex).splitlines())
-
+    result = run_sandbox('function() {code} end', code)
     target = get_target(message, nick)
     return irc.chat_message(target, result)
 
