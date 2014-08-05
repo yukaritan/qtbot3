@@ -10,6 +10,8 @@ from plugins import commands
 from plugins import greetings
 # noinspection PyUnresolvedReferences
 from plugins import rainbow
+# noinspection PyUnresolvedReferences
+from plugins import lua
 
 
 #
