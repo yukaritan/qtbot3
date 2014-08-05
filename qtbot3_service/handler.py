@@ -41,11 +41,11 @@ def handle_action(message: Message, nick: str):
     return irc.chat_message('NickServ', 'identify ' + get_setting('identify'))
 
 
-@hook('notice')
-def handle_action(message: Message, nick: str):
-    print('notice:', message.members)
-    return '\r\n'.join((irc.chat_message('yukarin', 'I got a notice from %s:' % message.nick),
-                        irc.chat_message('yukarin', message.message)))
+# @hook('notice')
+# def handle_action(message: Message, nick: str):
+#     print('notice:', message.members)
+#     return '\r\n'.join((irc.chat_message(get_master_nick(), 'I got a notice from %s:' % message.nick),
+#                         irc.chat_message(get_master_nick(), message.message)))
 
 
 #
