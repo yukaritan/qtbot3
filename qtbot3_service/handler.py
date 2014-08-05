@@ -53,7 +53,7 @@ def handle_join(message: Message, nick: str):
     if message.nick == nick:
         return
     print('join:', message.members)
-    return '\r\n'.join(irc.chat_message(message.target, 'hai %s! ^__^' % message.nick))
+    return irc.chat_message(message.target, 'hai %s! ^__^' % message.nick)
 
 
 #
