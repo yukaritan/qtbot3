@@ -26,7 +26,7 @@ def get_host(message: Message, match, nick: str) -> str:
         print(ex)
 
 
-@msghook('who is [^\s] master.*')
+@msghook('master')
 def get_master(message: Message, match, nick: str) -> str:
     try:
         target = get_target(message, nick)
