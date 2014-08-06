@@ -1,5 +1,5 @@
 import util.irc as irc
-from util.handler_utils import hook, hooks, message_hooks, remember_user, get_master_nick
+from util.handler_utils import hook, hooks, message_hooks, remember_user, get_master_nick, ignore_self
 from util.linetypes import LINE_TYPES
 from util.message import Message
 from util.settings import get_setting
@@ -24,12 +24,9 @@ from plugins import test
 
 @hook('message')
 @remember_user
+@ignore_self
 def handle_message(message: Message, nick: str):
     try:
-        if message.nick == nick:
-            print("ignoring message from self")
-            return
-
         print('message from {nick}: {message}'.format(**message.members))
         for regex, function in message_hooks.items():
             match = regex.match(message.message)
@@ -41,6 +38,7 @@ def handle_message(message: Message, nick: str):
 
 
 @hook('notice')
+@ignore_self
 def handle_notice(message: Message, nick: str):
     print('notice:', message.members)
     return '\r\n'.join((irc.chat_message(get_master_nick(), 'I got a notice from %s:' % message.nick),
@@ -49,18 +47,17 @@ def handle_notice(message: Message, nick: str):
 
 @hook('join')
 @remember_user
+@ignore_self
 def handle_join(message: Message, nick: str):
-    if message.nick == nick:
-        return
     print('join:', message.members)
     return irc.chat_message(message.target, 'hai %s! ^__^' % message.nick)
 
 
 @hook('part')
+@hook('quit')
 @remember_user
+@ignore_self
 def handle_part(message: Message, nick: str):
-    if message.nick == nick:
-        return
     print('part:', message.members)
     return irc.chat_message(message.target, 'bai %s! ;__;' % message.nick)
 

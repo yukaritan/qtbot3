@@ -1,9 +1,10 @@
 from util import irc
-from util.handler_utils import get_target, fetch_all, get_master_nick, cmdhook
+from util.handler_utils import get_target, fetch_all, get_master_nick, cmdhook, ignore_self
 from util.message import Message
 
 
 @cmdhook('host (?P<nick>.*)')
+@ignore_self
 def get_host(message: Message, match, nick: str) -> str:
     """just parrot the host associated with a nick"""
 
@@ -27,6 +28,7 @@ def get_host(message: Message, match, nick: str) -> str:
 
 
 @cmdhook('master')
+@ignore_self
 def get_master(message: Message, match, nick: str) -> str:
     try:
         target = get_target(message, nick)

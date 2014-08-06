@@ -96,6 +96,18 @@ def remember_user(fn):
     return wrapper
 
 
+def ignore_self(fn):
+    """If the bot did something, make sure it doesn't react"""
+
+    def wrapper(message: Message, nick: str):
+        if message.nick == nick:
+            print("ignoring self")
+            return None
+        return fn(message, nick)
+
+    return wrapper
+
+
 def get_target(message: Message, nick: str) -> str:
     """Figures out what to target. This is because message.target is the bot's own nick in a private message."""
     if message.target == nick:

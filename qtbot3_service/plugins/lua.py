@@ -1,7 +1,7 @@
 """This module is probably dangerous. Use at your own risk."""
 
 from util.irc import chat_message
-from util.handler_utils import authenticate, get_target, cmdhook
+from util.handler_utils import authenticate, get_target, cmdhook, ignore_self
 from util.message import Message
 import lupa
 
@@ -53,6 +53,7 @@ def run_sandbox(template: str, code: str) -> [str]:
 
 @cmdhook('evalr (?P<code>.*)')
 @authenticate
+@ignore_self
 def lua_evalr(message: Message, match, nick: str) -> str:
     """evaluate a single statement"""
     code = match['code']
@@ -64,6 +65,7 @@ def lua_evalr(message: Message, match, nick: str) -> str:
 
 @cmdhook('eval (?P<code>.*)')
 @authenticate
+@ignore_self
 def lua_eval(message: Message, match, nick: str) -> str:
     """evaluate a series of statements, but you'll have to return"""
     code = match['code']
