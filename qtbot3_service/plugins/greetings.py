@@ -5,14 +5,29 @@ from util.message import Message
 
 
 def prepare_greeting(nick: str) -> str:
-    greetings = ['Konnichiwa {nick}~ O-genki desu ka?',
-                 'Konnichiwa {nick}~',
-                 'Ohayō gozaimasu {nick}!',
-                 'Ohayō {nick}!',
-                 'Hi {nick}, how are you?',
-                 'Nice to see you {nick}. ^___^']
-    greeting = random.choice(greetings)
-    return greeting.format(nick=nick)
+    phrase = ['Konnichiwa {nick}~ O-genki desu ka?',
+              'Konnichiwa {nick}~',
+              'Ohayō gozaimasu {nick}!',
+              'Ohayō {nick}!',
+              'Hi {nick}, how are you?',
+              'Nice to see you {nick}. ^___^',
+              'こんにちは {nick}-さん',
+              'こんばんは {nick}-ちゃん',
+              '元気ですか {nick}-さん',
+              'おはよう {nick}-ちゃん']
+    phrase = random.choice(phrase)
+    return phrase.format(nick=nick)
+
+
+def prepare_goodbye(nick: str) -> str:
+    phrase = ['bai {nick} ;__;',
+              'see you later, {nick} ^___^',
+              'おやすみなさい',
+              'さよなら',
+              'ではまた',
+              'また明日']
+    phrase = random.choice(phrase)
+    return phrase.format(nick=nick)
 
 
 @hook('join')
@@ -29,7 +44,7 @@ def handle_join(message: Message, nick: str):
 @ignore_self
 def handle_part(message: Message, nick: str):
     print('part:', message.members)
-    return irc.chat_message(message.target, 'bai %s! ;__;' % message.nick)
+    return irc.chat_message(message.target, prepare_goodbye(message.nick))
 
 
 @msghook('.*h[a]+i.*')
