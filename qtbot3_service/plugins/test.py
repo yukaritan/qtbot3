@@ -51,11 +51,11 @@ def currency_convert(message: Message, match, nick: str) -> str:
         rate = float(result['rate'])
         converted = amount * rate
 
-        message = "{amount} {from} is {converted} {to}".format(amount=amount,
-                                                               converted=converted,
-                                                               **result)
+        output = "{amount} {from} is {converted} {to}".format(amount=amount,
+                                                              converted=converted,
+                                                              **result)
 
         target = get_target(message, nick)
-        return irc.chat_message(target, "my master is " + get_master_nick() or "unknown to me")
+        return irc.chat_message(target, output)
     except Exception as ex:
         print(ex)
