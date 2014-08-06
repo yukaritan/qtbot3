@@ -27,6 +27,9 @@ def get_host(message: Message, match, nick: str) -> str:
 
 
 @cmdhook('master')
+@cmdhook('mustard')
+@cmdhook('testings')
+@cmdhook('horses')
 def get_master(message: Message, match, nick: str) -> str:
     try:
         target = get_target(message, nick)
