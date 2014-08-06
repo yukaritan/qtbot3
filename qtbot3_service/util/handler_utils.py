@@ -16,11 +16,12 @@ def hook(message_type: str):
 
     def wrapper(fn):
         hooks[message_type] = fn
+        return fn
 
     return wrapper
 
 
-def msghook(regex):
+def msghook(regex: str):
     """Hook a function to PRIVMSG"""
 
     def wrapper(fn):
@@ -30,7 +31,7 @@ def msghook(regex):
     return wrapper
 
 
-def cmdhook(regex):
+def cmdhook(regex: str):
     """Hook a function to PRIVMSG, but with a prefix defined in settings.json"""
 
     def wrapper(fn):
@@ -97,7 +98,7 @@ def remember_user(fn):
 
 
 def ignore_self(fn):
-    """If the bot did something, make sure it doesn't react"""
+    """If the bot did something, make sure it doesn't react to it"""
 
     def wrapper(message: Message, nick: str):
         if message.nick == nick:
