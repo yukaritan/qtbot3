@@ -1,9 +1,9 @@
 from util import irc
-from util.handler_utils import msghook, authenticate
+from util.handler_utils import cmdhook, authenticate
 from util.message import Message
 
 
-@msghook('join (?P<channel>.*)')
+@cmdhook('join (?P<channel>.*)')
 @authenticate
 def join(message: Message, match, nick: str) -> str:
     """join a channel"""
@@ -12,8 +12,8 @@ def join(message: Message, match, nick: str) -> str:
     return irc.join_channel(channel)
 
 
-@msghook('part (?P<channel>.*)')
-@msghook('leave (?P<channel>.*)')
+@cmdhook('part (?P<channel>.*)')
+@cmdhook('leave (?P<channel>.*)')
 @authenticate
 def part(message: Message, match, nick: str) -> str:
     """leave a channel"""

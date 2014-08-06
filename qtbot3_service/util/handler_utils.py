@@ -30,6 +30,16 @@ def msghook(regex):
     return wrapper
 
 
+def cmdhook(regex):
+    """Hook a function to PRIVMSG, but with a prefix defined in settings.json"""
+
+    def wrapper(fn):
+        message_hooks[re.compile(get_setting('cmd_prefix') + regex, re.IGNORECASE)] = fn
+        return fn
+
+    return wrapper
+
+
 def store_value(key: str, value) -> bool:
     try:
         url = 'http://127.0.0.1:4001/set/'

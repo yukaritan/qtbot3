@@ -1,5 +1,5 @@
 import util.irc as irc
-from util.handler_utils import hook, hooks, message_hooks, remember_user, fetch_value
+from util.handler_utils import hook, hooks, message_hooks, remember_user
 from util.linetypes import LINE_TYPES
 from util.message import Message
 from util.settings import get_setting
