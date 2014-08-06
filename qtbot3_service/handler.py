@@ -7,6 +7,8 @@ from util.settings import get_setting
 # noinspection PyUnresolvedReferences
 from plugins import commands
 # noinspection PyUnresolvedReferences
+from plugins import nickserv
+# noinspection PyUnresolvedReferences
 from plugins import greetings
 # noinspection PyUnresolvedReferences
 from plugins import rainbow
