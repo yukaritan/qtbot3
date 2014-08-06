@@ -49,7 +49,8 @@ def currency_convert(message: Message, match, nick: str) -> str:
         target = get_target(message, nick)
 
         if 'err' in result:
-            return irc.chat_message(target, "couldn't convert {currency1} to {currency2} ;__;")
+            output = "couldn't convert {currency1} to {currency2} ;__;"
+            return irc.chat_message(target, output.format(**match))
 
         amount = float(match['amount'])
         rate = float(result['rate'])
