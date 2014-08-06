@@ -1,5 +1,5 @@
 from util import irc
-from util.handler_utils import msghook, get_target, fetch_all
+from util.handler_utils import msghook, get_target, fetch_all, get_master_nick
 from util.message import Message
 
 
@@ -11,7 +11,10 @@ def get_host(message: Message, match, nick: str) -> str:
 
     try:
         target = get_target(message, nick)
-        n = match['nick']
+        n = match['nick'].strip()
+        if ' ' in n:
+            n = n.split(' ', 1)[0]
+
         storage = fetch_all()
 
         for k, v in storage.items():
@@ -21,3 +24,9 @@ def get_host(message: Message, match, nick: str) -> str:
 
     except Exception as ex:
         print(ex)
+
+
+@msghook('who is [^\s] master.*')
+def get_master(message: Message, match, nick: str) -> str:
+    target = get_target(message, nick)
+    return irc.chat_message(target, "my master is " + get_master_nick() or "unknown to me")
