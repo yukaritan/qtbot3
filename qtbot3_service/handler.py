@@ -1,5 +1,5 @@
 import util.irc as irc
-from util.handler_utils import hook, hooks, message_hooks, remember_user
+from util.handler_utils import hook, hooks, message_hooks, remember_user, fetch_value
 from util.linetypes import LINE_TYPES
 from util.message import Message
 from util.settings import get_setting
@@ -44,13 +44,11 @@ def handle_action(message: Message, nick: str):
     return irc.chat_message('NickServ', 'identify ' + get_setting('identify'))
 
 
-# I can't implement this until there's a way to tie users to their respective nicks
-#
-# @hook('notice')
-# def handle_notice(message: Message, nick: str):
-#     print('notice:', message.members)
-#     return '\r\n'.join((irc.chat_message(get_master_nick(), 'I got a notice from %s:' % message.nick),
-#                         irc.chat_message(get_master_nick(), message.message)))
+@hook('notice')
+def handle_notice(message: Message, nick: str):
+    print('notice:', message.members)
+    return '\r\n'.join((irc.chat_message(get_master_nick(), 'I got a notice from %s:' % message.nick),
+                        irc.chat_message(get_master_nick(), message.message)))
 
 
 @hook('join')

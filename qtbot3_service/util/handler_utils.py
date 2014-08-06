@@ -105,3 +105,9 @@ def authenticate(fn):
         return fn(message, match, nick)
 
     return wrapper
+
+
+def get_master_nick() -> str:
+    return fetch_value('user_' + get_setting('master'))
+
+
