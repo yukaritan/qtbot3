@@ -17,7 +17,8 @@ It connects to IRC. You need a couple more files for it to work.
         "master": "~you@your_host_here",
         "service_host": "localhost",
         "service_port": 4000,
-        "identify": "bot_passphrase_goes_here_but_its_sent_to_nickserv_so_be_careful"
+        "identify": "bot_passphrase_goes_here_but_its_sent_to_nickserv_so_be_careful",
+        "cmd_prefix": ";"
     }`
 
 
@@ -30,10 +31,11 @@ It connects to IRC. You need a couple more files for it to work.
 
 
 ## Run
-First start the service
+First start the services
 
     cd qtbot3_service
-    ./run.sh
+    ./run_storage.sh
+    ./run_service.sh
 
 Then the client
 
