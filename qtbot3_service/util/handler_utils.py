@@ -62,6 +62,20 @@ def fetch_value(key: str):
         return None
 
 
+def fetch_all():
+    try:
+        url = 'http://127.0.0.1:4001/getall/'
+        result = json.loads(requests.get(url).text)
+
+        if result['code'] == 200:
+            return result['payload']
+        return None
+
+    except Exception as ex:
+        print("fetch_value() exception:", ex)
+        return None
+
+
 def remember_user(fn):
     """Remember a user"""
 
