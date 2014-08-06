@@ -10,7 +10,7 @@ def prepare_greeting(nick: str) -> str:
                  'Ohayō gozaimasu {nick}!',
                  'Ohayō {nick}!',
                  'Hi {nick}, how are you?',
-                 'Nice to see you {nick}. (^_^)']
+                 'Nice to see you {nick}. ^___^']
     greeting = random.choice(greetings)
     return greeting.format(nick=nick)
 

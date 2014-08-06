@@ -1,5 +1,7 @@
+import json
+import requests
 from util import irc
-from util.handler_utils import get_target, fetch_all, get_master_nick, cmdhook, ignore_self
+from util.handler_utils import get_target, fetch_all, get_master_nick, cmdhook, ignore_self, msghook
 from util.message import Message
 
 
@@ -29,6 +31,30 @@ def get_host(message: Message, match, nick: str) -> str:
 @cmdhook('master')
 def get_master(message: Message, match, nick: str) -> str:
     try:
+        target = get_target(message, nick)
+        return irc.chat_message(target, "my master is " + get_master_nick() or "unknown to me")
+    except Exception as ex:
+        print(ex)
+
+
+@msghook('(?P<amount>\d*\.\d+|\d+)'
+         '\s+'
+         '(?P<currency1>[a-zA-Z]+)'
+         '\s+in\s+'
+         '(?P<currency2>[a-zA-Z]+)')
+def currency_convert(message: Message, match, nick: str) -> str:
+    try:
+        url = "http://rate-exchange.appspot.com/currency?from={currency1}&to={currency2}"
+        result = json.loads(requests.get(url.format(**match)).text)
+
+        amount = float(result['amount'])
+        rate = float(result['rate'])
+        converted = amount * rate
+
+        message = "{amount} {from} is {converted} {to}".format(amount=amount,
+                                                               converted=converted,
+                                                               **result)
+
         target = get_target(message, nick)
         return irc.chat_message(target, "my master is " + get_master_nick() or "unknown to me")
     except Exception as ex:
