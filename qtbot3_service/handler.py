@@ -11,6 +11,8 @@ from plugins import greetings
 # noinspection PyUnresolvedReferences
 from plugins import rainbow
 # noinspection PyUnresolvedReferences
+from plugins import test
+# noinspection PyUnresolvedReferences
 #from plugins import lua
 
 
