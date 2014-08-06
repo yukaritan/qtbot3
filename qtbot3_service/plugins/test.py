@@ -49,16 +49,16 @@ def currency_convert(message: Message, match, nick: str) -> str:
         target = get_target(message, nick)
 
         if 'err' in result:
-            output = "couldn't convert {currency1} to {currency2} ;__;"
+            output = "couldn't convert {currency1:G} to {currency2:G} ;__;"
             return irc.chat_message(target, output.format(**match))
 
         amount = float(match['amount'])
         rate = float(result['rate'])
         converted = amount * rate
 
-        output = "{amount} {from} is {converted} {to}".format(amount=amount,
-                                                              converted=converted,
-                                                              **result)
+        output = "{amount} {from:G} is {converted} {to:G}".format(amount=amount,
+                                                                  converted=converted,
+                                                                  **result)
 
         return irc.chat_message(target, output)
     except Exception as ex:
