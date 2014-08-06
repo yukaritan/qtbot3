@@ -1,6 +1,6 @@
 """This module is probably dangerous. Use at your own risk."""
 
-from util import irc
+from util.irc import chat_message
 from util.handler_utils import authenticate, get_target, cmdhook
 from util.message import Message
 import lupa
@@ -59,7 +59,7 @@ def lua_evalr(message: Message, match, nick: str) -> str:
     print("received lua code from {nick}: {code}".format(nick=nick, code=code))
     result = run_sandbox('function() return {code} end', code)
     target = get_target(message, nick)
-    return '\r\n'.join(irc.chat_message(target, line) for line in result)
+    return '\r\n'.join(chat_message(target, line) for line in result)
 
 
 @cmdhook('eval (?P<code>.*)')
@@ -70,4 +70,4 @@ def lua_eval(message: Message, match, nick: str) -> str:
     print("received lua code from {nick}: {code}".format(nick=nick, code=code))
     result = run_sandbox('function() {code} end', code)
     target = get_target(message, nick)
-    return '\r\n'.join(irc.chat_message(target, line) for line in result)
+    return '\r\n'.join(chat_message(target, line) for line in result)
