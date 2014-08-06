@@ -45,23 +45,6 @@ def handle_notice(message: Message, nick: str):
                         irc.chat_message(get_master_nick(), message.message)))
 
 
-@hook('join')
-@remember_user
-@ignore_self
-def handle_join(message: Message, nick: str):
-    print('join:', message.members)
-    return irc.chat_message(message.target, 'hai %s! ^__^' % message.nick)
-
-
-@hook('part')
-@hook('quit')
-@remember_user
-@ignore_self
-def handle_part(message: Message, nick: str):
-    print('part:', message.members)
-    return irc.chat_message(message.target, 'bai %s! ;__;' % message.nick)
-
-
 #
 #  The only function you should ever have to call
 #
