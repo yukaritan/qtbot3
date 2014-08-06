@@ -47,7 +47,7 @@ def currency_convert(message: Message, match, nick: str) -> str:
         url = "http://rate-exchange.appspot.com/currency?from={currency1}&to={currency2}"
         result = json.loads(requests.get(url.format(**match)).text)
 
-        amount = float(result['amount'])
+        amount = float(match['amount'])
         rate = float(result['rate'])
         converted = amount * rate
 
