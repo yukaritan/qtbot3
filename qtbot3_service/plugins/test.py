@@ -44,6 +44,7 @@ def get_master(message: Message, match, nick: str) -> str:
          '(?P<currency2>[a-zA-Z]+)')
 def currency_convert(message: Message, match, nick: str) -> str:
     try:
+        print("converting currency...")
         url = "http://rate-exchange.appspot.com/currency?from={currency1}&to={currency2}"
 
         currency1 = match['currency1'].upper()
@@ -55,6 +56,7 @@ def currency_convert(message: Message, match, nick: str) -> str:
 
         if 'err' in result:
             output = "couldn't convert {currency1} to {currency2} ;__;"
+            print(output)
             return irc.chat_message(target, output.format(currency1=currency1,
                                                           currency2=currency2))
 
@@ -66,7 +68,7 @@ def currency_convert(message: Message, match, nick: str) -> str:
                                                                           converted=converted,
                                                                           currency1=currency1,
                                                                           currency2=currency2)
-
+        print(output)
         return irc.chat_message(target, output)
     except Exception as ex:
         print(ex)
