@@ -1,7 +1,7 @@
 """This module is probably dangerous. Use at your own risk."""
 
 from util import irc
-from util.handler_utils import msghook, authenticate, get_target
+from util.handler_utils import authenticate, get_target, cmdhook
 from util.message import Message
 import lupa
 
@@ -43,15 +43,15 @@ def get_sandbox() -> lupa.LuaRuntime:
     return sandbox
 
 
-def run_sandbox(template: str, code: str) -> str:
+def run_sandbox(template: str, code: str) -> [str]:
     try:
         function = get_sandbox().eval(template.format(code=code))
-        return '\r\n'.join(str(function()).splitlines())
+        return function().splitlines()
     except Exception as ex:
-        return '\r\n'.join(str(ex).splitlines())
+        return str(ex).splitlines()
 
 
-@msghook('evalr (?P<code>.*)')
+@cmdhook('evalr (?P<code>.*)')
 @authenticate
 def lua_evalr(message: Message, match, nick: str) -> str:
     """evaluate a single statement"""
@@ -59,10 +59,10 @@ def lua_evalr(message: Message, match, nick: str) -> str:
     print("received lua code from {nick}: {code}".format(nick=nick, code=code))
     result = run_sandbox('function() return {code} end', code)
     target = get_target(message, nick)
-    return irc.chat_message(target, result)
+    return '\r\n'.join(irc.chat_message(target, line) for line in result)
 
 
-@msghook('eval (?P<code>.*)')
+@cmdhook('eval (?P<code>.*)')
 @authenticate
 def lua_eval(message: Message, match, nick: str) -> str:
     """evaluate a series of statements, but you'll have to return"""
@@ -70,5 +70,4 @@ def lua_eval(message: Message, match, nick: str) -> str:
     print("received lua code from {nick}: {code}".format(nick=nick, code=code))
     result = run_sandbox('function() {code} end', code)
     target = get_target(message, nick)
-    return irc.chat_message(target, result)
-
+    return '\r\n'.join(irc.chat_message(target, line) for line in result)
