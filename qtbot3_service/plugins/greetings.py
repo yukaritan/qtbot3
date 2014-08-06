@@ -11,9 +11,9 @@ def prepare_greeting(nick: str) -> str:
               'Ohayō {nick}!',
               'Hi {nick}, how are you?',
               'Nice to see you {nick}. ^___^',
-              'こんにちは {nick}-さん',
+              'こんにちは {nick}-ちゃん',
               'こんばんは {nick}-ちゃん',
-              '元気ですか {nick}-さん',
+              '元気ですか {nick}-ちゃん',
               'おはよう {nick}-ちゃん']
     phrase = random.choice(phrase)
     return phrase.format(nick=nick)
