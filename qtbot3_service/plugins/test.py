@@ -4,7 +4,6 @@ from util.message import Message
 
 
 @cmdhook('host (?P<nick>.*)')
-@ignore_self
 def get_host(message: Message, match, nick: str) -> str:
     """just parrot the host associated with a nick"""
 
@@ -28,7 +27,6 @@ def get_host(message: Message, match, nick: str) -> str:
 
 
 @cmdhook('master')
-@ignore_self
 def get_master(message: Message, match, nick: str) -> str:
     try:
         target = get_target(message, nick)
