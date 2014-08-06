@@ -3,9 +3,11 @@ from util.handler_utils import msghook, get_target, fetch_all
 from util.message import Message
 
 
-@msghook('host (?P<nicks>.*)')
+@msghook('host (?P<nick>.*)')
 def get_host(message: Message, match, nick: str) -> str:
     """just parrot the host associated with a nick"""
+
+    print("get_host() was called")
 
     try:
         target = get_target(message, nick)
