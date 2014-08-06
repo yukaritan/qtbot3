@@ -38,12 +38,6 @@ def handle_message(message: Message, nick: str):
         print('handle_message exeption:', ex)
 
 
-@hook('server_mode')
-def handle_action(message: Message, nick: str):
-    print('got server_mode:', message.members)
-    return irc.chat_message('NickServ', 'identify ' + get_setting('identify'))
-
-
 @hook('notice')
 def handle_notice(message: Message, nick: str):
     print('notice:', message.members)
@@ -58,6 +52,15 @@ def handle_join(message: Message, nick: str):
         return
     print('join:', message.members)
     return irc.chat_message(message.target, 'hai %s! ^__^' % message.nick)
+
+
+@hook('part')
+@remember_user
+def handle_part(message: Message, nick: str):
+    if message.nick == nick:
+        return
+    print('part:', message.members)
+    return irc.chat_message(message.target, 'bai %s! ;__;' % message.nick)
 
 
 #
