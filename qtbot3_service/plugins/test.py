@@ -45,21 +45,27 @@ def get_master(message: Message, match, nick: str) -> str:
 def currency_convert(message: Message, match, nick: str) -> str:
     try:
         url = "http://rate-exchange.appspot.com/currency?from={currency1}&to={currency2}"
-        result = json.loads(requests.get(url.format(currency1=match['currency1'].upper(),
-                                                    currency2=match['currency2'].upper())).text)
+
+        currency1 = match['currency1'].upper()
+        currency2 = match['currency2'].upper()
+
+        result = json.loads(requests.get(url.format(currency1=currency1,
+                                                    currency2=currency2)).text)
         target = get_target(message, nick)
 
         if 'err' in result:
             output = "couldn't convert {currency1} to {currency2} ;__;"
-            return irc.chat_message(target, output.format(**match))
+            return irc.chat_message(target, output.format(currency1=currency1,
+                                                          currency2=currency2))
 
         amount = float(match['amount'])
         rate = float(result['rate'])
         converted = amount * rate
 
-        output = "{amount} {from} is {converted} {to}".format(amount=amount,
-                                                              converted=converted,
-                                                              **result)
+        output = "{amount} {currency1} is {converted} {currency2}".format(amount=amount,
+                                                                          converted=converted,
+                                                                          currency1=currency1,
+                                                                          currency2=currency2)
 
         return irc.chat_message(target, output)
     except Exception as ex:
