@@ -1,7 +1,9 @@
 import json
+
 import requests
+
 from util import irc
-from util.handler_utils import get_target, fetch_all, get_master_nick, cmdhook, ignore_self, msghook
+from util.handler_utils import get_target, fetch_all, get_master_nick, cmdhook, msghook
 from util.message import Message
 
 

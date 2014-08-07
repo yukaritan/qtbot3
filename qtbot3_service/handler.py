@@ -51,6 +51,7 @@ def handle_notice(message: Message, nick: str):
 
 def handle(data: str, nick: str) -> Message:
     """nick is the bot's own nick"""
+    print(data)
     for name, regex in LINE_TYPES:
         match = regex.match(data)
         if match:

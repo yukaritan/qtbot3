@@ -43,7 +43,7 @@ def handle_join(message: Message, nick: str):
 @remember_user
 @ignore_self
 def handle_part(message: Message, nick: str):
-    print('part:', message.members)
+    print('part/quit:', message.members)
     return irc.chat_message(message.target, prepare_goodbye(message.nick))
 
 
@@ -52,9 +52,19 @@ def handle_part(message: Message, nick: str):
 @msghook('.*hello.*')
 def greet(message: Message, match, nick: str) -> str:
     """nick is the bot's own nick"""
-
     lownick = nick.lower()
     lowmsg = message.message.lower()
     if lownick in lowmsg or ('-' in nick and lownick.split('-', 1)[0] in lowmsg):
         target = get_target(message, nick)
         return irc.chat_message(target, prepare_greeting(message.nick))
+
+
+@msghook('.*b[a]+i.*')
+@msghook('.*b[y]+[e]+.*')
+def goodbye(message: Message, match, nick: str) -> str:
+    """nick is the bot's own nick"""
+    lownick = nick.lower()
+    lowmsg = message.message.lower()
+    if lownick in lowmsg or ('-' in nick and lownick.split('-', 1)[0] in lowmsg):
+        target = get_target(message, nick)
+        return irc.chat_message(target, prepare_goodbye(message.nick))
