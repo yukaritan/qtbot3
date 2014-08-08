@@ -79,15 +79,3 @@ LINE_TYPES = [
                            '!(?P<user>[^\s]+)'
                            ' (?P<command>[^\s]+)'
                            ' (?P<target>[^\s]+)'))]
-
-
-def test():
-    types = dict(LINE_TYPES)
-    part = types['part']
-
-    if c:
-        print(c.groupdict())
-
-
-if __name__ == '__main__':
-    test()
