@@ -38,14 +38,13 @@ LINE_TYPES = [
                         '!(?P<user>[^\s]+)'
                         ' PART'
                         ' (?P<target>[^\s]+)'
-                        '[ :]*(?P<message>.*)')),
+                        '( :(?P<message>.*))?')),
 
     # Whenever anyone leaves a server
     ('quit', re.compile(':(?P<nick>[^\s]+)'
                         '!(?P<user>[^\s]+)'
                         ' QUIT'
-                        ' (?P<target>[^\s]+)'
-                        '[ :]*(?P<message>.*)')),
+                        '( :(?P<message>.*))?')),
 
     # Whenever anyone changes modes, this fires. users only
     ('mode', re.compile(':(?P<nick>[^\s]+)'
@@ -80,3 +79,15 @@ LINE_TYPES = [
                            '!(?P<user>[^\s]+)'
                            ' (?P<command>[^\s]+)'
                            ' (?P<target>[^\s]+)'))]
+
+
+def test():
+    types = dict(LINE_TYPES)
+    part = types['part']
+
+    if c:
+        print(c.groupdict())
+
+
+if __name__ == '__main__':
+    test()

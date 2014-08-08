@@ -39,12 +39,12 @@ def handle_join(message: Message, nick: str):
 
 
 @hook('part')
-@hook('quit')
 @remember_user
 @ignore_self
 def handle_part(message: Message, nick: str):
-    print('part/quit:', message.members)
-    return irc.chat_message(message.target, prepare_goodbye(message.nick))
+    print('part:', message.members)
+    target = get_target(message, nick)
+    return irc.chat_message(target, prepare_goodbye(message.nick))
 
 
 @msghook('.*h[a]+i.*')
