@@ -10,9 +10,7 @@ def is_mentioned(message: Message, nick: str) -> bool:
 
 
 @msghook('.*')  # todo: this should be of the lowest possible priority ...and I need to find a way to prioritize hooks
-@remember_user
-@ignore_self
-def handle_chat(message: Message, nick: str):
+def handle_chat(message: Message, match, nick: str):
     if is_mentioned(message, nick):
         target = get_target(message, nick)
         return irc.chat_message(target, "{nick}: you said stuff to or about me! ^____^".format(nick=message.nick))
