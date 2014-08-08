@@ -16,6 +16,8 @@ from plugins import rainbow
 from plugins import test
 # noinspection PyUnresolvedReferences
 #from plugins import lua
+# noinspection PyUnresolvedReferences
+from plugins import cleverbot
 
 
 #
