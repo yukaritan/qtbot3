@@ -62,5 +62,6 @@ def handle(data: str, nick: str) -> Message:
                 pass
 
             print('no hooks found for %s.' % name, 'called with:', match.groupdict())
+            return
 
     return None

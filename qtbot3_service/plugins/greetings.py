@@ -47,6 +47,13 @@ def handle_part(message: Message, nick: str):
     return irc.chat_message(target, prepare_goodbye(message.nick))
 
 
+@hook('quit')
+@remember_user
+@ignore_self
+def handle_quit(message: Message, nick: str):
+    print('quit:', message.members)
+
+
 @msghook('.*h[a]+i.*')
 @msghook('.*hey.*')
 @msghook('.*hello.*')

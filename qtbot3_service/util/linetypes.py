@@ -66,7 +66,6 @@ LINE_TYPES = [
                                ' \\1'
                                ' :\+i')),
 
-
     # Catches notices sent by the server
     ('notice', re.compile(':(?P<nick>[^\s]+)'
                           '!(?P<user>[^\s]+)'
