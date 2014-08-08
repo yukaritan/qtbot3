@@ -2,7 +2,11 @@ from concurrent.futures import ThreadPoolExecutor
 import json
 import socket
 import requests
-from util.settings import get_setting
+
+import sys
+sys.path.append('..')
+# noinspection PyUnresolvedReferences
+from qtbot3_service.util.settings import get_setting
 
 
 class Qtbot3:

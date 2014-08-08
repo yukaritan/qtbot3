@@ -11,4 +11,3 @@ def handle():
     json = request.get_json()
     response = handler.handle(json['data'], json['nick'])
     return create_response(response)
-
