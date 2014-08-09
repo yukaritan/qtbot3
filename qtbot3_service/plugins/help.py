@@ -5,6 +5,8 @@ from util.message import Message
 
 @cmdhook('help')
 def handle_help(message: Message, match, nick: str):
+    """Displays all available commands in regex form. Not very readable at all."""
+
     print('{nick} asked for help'.format(nick=message.nick))
     response = ', '.join(regex.pattern for regex in message_hooks.keys())
     target = get_target(message, nick)
