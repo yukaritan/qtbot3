@@ -44,7 +44,8 @@ def handle_chat(message: Message, match, nick: str):
             target = get_target(message, nick)
             return irc.chat_message(target, '{nick}: {response}'.format(nick=message.nick,
                                                                         response=response))
-        except cleverbot.CleverbotAPIRejection as ex:
+        except Exception as ex:
             print("Cleverbot exception:", ex)
+
 
 
