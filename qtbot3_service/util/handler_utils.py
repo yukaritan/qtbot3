@@ -134,3 +134,7 @@ def get_master_nick() -> str:
     return fetch_value('user_' + get_setting('master'))
 
 
+def is_mentioned(message: Message, nick: str) -> bool:
+    lownick = nick.lower()
+    lowmsg = message.message.lower()
+    return lownick in lowmsg or ('-' in nick and lownick.split('-', 1)[0] in lowmsg)

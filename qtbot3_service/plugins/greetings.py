@@ -1,7 +1,6 @@
 import random
-from plugins.cleverbot import is_mentioned
 from util import irc
-from util.handler_utils import msghook, get_target, hook, remember_user, ignore_self
+from util.handler_utils import msghook, get_target, hook, remember_user, ignore_self, is_mentioned
 from util.message import Message
 
 
