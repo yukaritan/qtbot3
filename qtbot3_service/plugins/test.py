@@ -47,13 +47,15 @@ def get_master(message: Message, match, nick: str) -> str:
 def currency_convert(message: Message, match, nick: str) -> str:
     try:
         print("converting currency...")
-        url = "http://rate-exchange.appspot.com/currency?from={currency1}&to={currency2}"
+        template = "http://rate-exchange.appspot.com/currency?from={currency1}&to={currency2}"
 
         currency1 = match['currency1'].upper()
         currency2 = match['currency2'].upper()
 
-        result = json.loads(requests.get(url.format(currency1=currency1,
-                                                    currency2=currency2)).text)
+        url = template.format(currency1=currency1,
+                              currency2=currency2)
+
+        result = json.loads(requests.get(url).text)
         target = get_target(message, nick)
 
         if 'err' in result:
