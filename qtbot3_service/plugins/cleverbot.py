@@ -10,6 +10,11 @@ class CleverbotFactory:
     _fail = False
 
     @staticmethod
+    def force_reload():
+        CleverbotFactory._cleverbot = None
+        CleverbotFactory.get_instance()
+
+    @staticmethod
     def get_instance() -> cleverbot.Cleverbot:
         if not CleverbotFactory._fail and not CleverbotFactory._cleverbot:
             try:
@@ -45,3 +50,4 @@ def handle_chat(message: Message, match, nick: str):
                                                                         response=response))
         except Exception as ex:
             print("Cleverbot exception:", ex)
+            CleverbotFactory.force_reload()

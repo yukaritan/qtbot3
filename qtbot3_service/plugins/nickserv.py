@@ -8,5 +8,3 @@ from util.settings import get_setting
 def handle_action(message: Message, nick: str):
     print('got server_mode:', message.members)
     return irc.chat_message('NickServ', 'identify ' + get_setting('identify'))
-
-
