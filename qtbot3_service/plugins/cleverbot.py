@@ -28,7 +28,7 @@ class CleverbotFactory:
 @msghook('.*')  # todo: this should be of the lowest possible priority ...and I need to find a way to prioritize hooks
 def handle_chat(message: Message, match, nick: str):
 
-    print("Message from", message.nick,"is being handled by cleverbot integration:", message.message)
+    print("Message from", message.nick, "is being handled by cleverbot integration:", message.message)
 
     if is_mentioned(message, nick):
 
@@ -38,7 +38,9 @@ def handle_chat(message: Message, match, nick: str):
             return
 
         try:
+            print("waiting for response...")
             response = clev.ask(message.message)
+            print("got response:", response)
             target = get_target(message, nick)
             return irc.chat_message(target, '{nick}: {response}'.format(nick=message.nick,
                                                                         response=response))
