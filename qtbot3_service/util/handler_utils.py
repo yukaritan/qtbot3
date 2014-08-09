@@ -137,4 +137,14 @@ def get_master_nick() -> str:
 def is_mentioned(message: Message, nick: str) -> bool:
     lownick = nick.lower()
     lowmsg = message.message.lower()
-    return lownick in lowmsg or ('-' in nick and lownick.split('-', 1)[0] in lowmsg)
+
+    if message.target == nick:
+        return True
+
+    if lownick in lowmsg:
+        return True
+
+    if '-' in nick and lownick.split('-', 1)[0] in lowmsg:
+        return True
+
+    return False
