@@ -91,7 +91,7 @@ class Qtbot3:
 
     def run(self):
         self.connect()
-        with ThreadPoolExecutor(25) as tpe:
+        with ThreadPoolExecutor(10) as tpe:
             while self._running:
                 for data in self.read():
                     if data.startswith('PING'):
