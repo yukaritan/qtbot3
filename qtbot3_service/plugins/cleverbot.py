@@ -50,4 +50,5 @@ def handle_chat(message: Message, match, nick: str):
                                                                         response=response))
         except Exception as ex:
             print("Cleverbot exception:", ex)
+            print("Invalidating cleverbot session and creating a new one")
             CleverbotFactory.force_reload()
