@@ -3,28 +3,7 @@ from util.handler_utils import hook, hooks, message_hooks, remember_user, get_ma
 from util.linetypes import LINE_TYPES
 from util.message import Message
 from util.plugin_loader import load_plugin
-
-
-#
-# Plugins
-#
-
-# # noinspection PyUnresolvedReferences
-# from plugins import commands
-# # noinspection PyUnresolvedReferences
-# from plugins import nickserv
-# # noinspection PyUnresolvedReferences
-# from plugins import greetings
-# # noinspection PyUnresolvedReferences
-# from plugins import rainbow
-# # noinspection PyUnresolvedReferences
-# from plugins import test
-# # noinspection PyUnresolvedReferences
-# from plugins import currency
-# # noinspection PyUnresolvedReferences
-# #from plugins import lua
-# # noinspection PyUnresolvedReferences
-# from plugins import cleverbot
+from util.settings import get_setting
 
 
 #
@@ -80,13 +59,5 @@ def handle(data: str, nick: str) -> Message:
 #  Plugins
 #
 
-plugins = ["commands",
-           "nickserv",
-           "greetings",
-           "rainbow",
-           "test",
-           "currency",
-           "cleverbot"]
-
-for plugin in plugins:
+for plugin in get_setting('plugins'):
     load_plugin(plugin)
