@@ -6,7 +6,7 @@ def load_plugin(name: str) -> bool:
     name = name.replace('.', '')
 
     try:
-        print("loading plugin:", name)
+        # print("loading plugin:", name)
         __import__("plugins." + name)
         return True
 
