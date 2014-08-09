@@ -27,7 +27,8 @@ It connects to IRC. You need a couple more files for it to work.
 2. Gunicorn
 3. Flask
 4. Lupa
-5. Other things. Please let me know what it has you install.
+5. Cleverbot2
+6. Other things. Please let me know what it has you install.
 
 
 ## Run
