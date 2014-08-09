@@ -12,7 +12,6 @@ class CleverbotFactory:
     @staticmethod
     def force_reload():
         CleverbotFactory._cleverbot = None
-        CleverbotFactory.get_instance()
 
     @staticmethod
     def get_instance() -> cleverbot.Cleverbot:
