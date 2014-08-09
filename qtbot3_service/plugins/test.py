@@ -1,5 +1,5 @@
 from util import irc
-from util.handler_utils import get_target, fetch_all, get_master_nick, cmdhook
+from util.handler_utils import get_target, fetch_all, get_master_nick, cmdhook, msghook
 from util.message import Message
 
 
@@ -35,3 +35,10 @@ def get_master(message: Message, match, nick: str) -> str:
         print(ex)
 
 
+@msghook('\\.bots')
+def report_as_bot(message: Message, match, nick: str) -> str:
+    try:
+        target = get_target(message, nick)
+        return irc.chat_message(target, "right here!")
+    except Exception as ex:
+        print(ex)

@@ -26,6 +26,7 @@ class CleverbotFactory:
 
 
 @msghook('.*')  # todo: this should be of the lowest possible priority ...and I need to find a way to prioritize hooks
+                #       or maybe this plugin should just be loaded last. We'll see.
 def handle_chat(message: Message, match, nick: str):
     if is_mentioned(message, nick):
         print("Message from", message.nick, "is being handled by cleverbot integration:", message.message)
@@ -44,6 +45,3 @@ def handle_chat(message: Message, match, nick: str):
                                                                         response=response))
         except Exception as ex:
             print("Cleverbot exception:", ex)
-
-
-

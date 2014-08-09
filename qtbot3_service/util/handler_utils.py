@@ -141,10 +141,10 @@ def is_mentioned(message: Message, nick: str) -> bool:
     if message.target == nick:
         return True
 
-    if lownick in lowmsg:
+    elif lownick in lowmsg:
         return True
 
-    if '-' in nick and lownick.split('-', 1)[0] in lowmsg:
+    elif '-' in nick and lownick.split('-', 1)[0] in lowmsg:
         return True
 
     return False
