@@ -1,4 +1,4 @@
-import cleverbot.cleverbot
+import cleverbot
 
 from util import irc
 from util.handler_utils import msghook, get_target, is_mentioned
@@ -10,10 +10,10 @@ class CleverbotFactory:
     _fail = False
 
     @staticmethod
-    def get_instance() -> cleverbot.cleverbot.Cleverbot:
+    def get_instance() -> cleverbot.Cleverbot:
         if not CleverbotFactory._fail and not CleverbotFactory._cleverbot:
             try:
-                CleverbotFactory._cleverbot = cleverbot.cleverbot.Cleverbot()
+                CleverbotFactory._cleverbot = cleverbot.Cleverbot()
             except ImportError as ex:
                 CleverbotFactory._cleverbot = None
                 CleverbotFactory._fail = True
@@ -33,8 +33,12 @@ def handle_chat(message: Message, match, nick: str):
         if not clev:
             return
 
-        response = clev.ask(message.message)
-        target = get_target(message, nick)
+        try:
+            response = clev.ask(message.message)
+            target = get_target(message, nick)
+            return irc.chat_message(target, '{nick}: {response}'.format(nick=message.nick,
+                                                                        response=response))
+        except cleverbot.CleverbotAPIRejection as ex:
+            print("Cleverbot exception:", ex)
 
-        return irc.chat_message(target, '{nick}: {response}'.format(nick=message.nick,
-                                                                    response=response))
+
