@@ -24,11 +24,12 @@ It connects to IRC. You need a couple more files for it to work.
 
 ## Requirements
 1. Python 3.4
-2. Gunicorn
-3. Flask
-4. Lupa
-5. Cleverbot2
-6. Other things. Please let me know what it has you install.
+2. Requests
+3. Gunicorn
+4. Flask
+5. Lupa
+6. Cleverbot2
+7. Other things. Please let me know what it has you install.
 
 
 ## Run
