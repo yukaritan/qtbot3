@@ -27,10 +27,8 @@ class CleverbotFactory:
 
 @msghook('.*')  # todo: this should be of the lowest possible priority ...and I need to find a way to prioritize hooks
 def handle_chat(message: Message, match, nick: str):
-
-    print("Message from", message.nick, "is being handled by cleverbot integration:", message.message)
-
     if is_mentioned(message, nick):
+        print("Message from", message.nick, "is being handled by cleverbot integration:", message.message)
 
         clev = CleverbotFactory.get_instance()
         if not clev:

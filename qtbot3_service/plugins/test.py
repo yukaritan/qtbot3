@@ -55,6 +55,8 @@ def currency_convert(message: Message, match, nick: str) -> str:
         url = template.format(currency1=currency1,
                               currency2=currency2)
 
+        print(url)
+
         result = json.loads(requests.get(url).text)
         target = get_target(message, nick)
 
