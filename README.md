@@ -45,18 +45,14 @@ It connects to IRC. You need a couple more files for it to work.
 ## Run
 First start the services
 
-    ```
     cd qtbot3_service
     ./run_storage.sh
     ./run_service.sh
-    ```
 
 Then the client
 
-    ```
     cd qtbot3_bot
     python3.4 main.py
-    ```
 
 This has only been tested on Python 3.4.
 
