@@ -3,6 +3,8 @@ from flask import Flask, request
 from util.response import create_response
 import handler
 
+print("Starting instance")
+
 app = Flask(__name__)
 
 
