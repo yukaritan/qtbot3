@@ -1,6 +1,3 @@
-import plugins
-
-
 def load_plugin(name: str) -> bool:
     """name is the name of a file under qtbot3_service/plugins/, without the file extension"""
     name = name.replace('.', '')
