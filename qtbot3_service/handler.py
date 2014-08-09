@@ -14,6 +14,8 @@ from plugins import rainbow
 # noinspection PyUnresolvedReferences
 from plugins import test
 # noinspection PyUnresolvedReferences
+from plugins import currency
+# noinspection PyUnresolvedReferences
 #from plugins import lua
 # noinspection PyUnresolvedReferences
 from plugins import cleverbot
