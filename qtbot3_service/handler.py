@@ -80,12 +80,12 @@ def handle(data: str, nick: str) -> Message:
 #  Plugins
 #
 
-plugins = ["commands"
-           "nickserv"
-           "greetings"
-           "rainbow"
-           "test"
-           "currency"
+plugins = ["commands",
+           "nickserv",
+           "greetings",
+           "rainbow",
+           "test",
+           "currency",
            "cleverbot"]
 
 for plugin in plugins:
