@@ -7,6 +7,9 @@ import json
 import requests
 
 
+print("loading 4chan plugin")
+
+
 def scrape(board: str, filtertext: str):
     try:
         data = requests.get("http://boards.4chan.org/{board}/catalog".format(board=board)).text
