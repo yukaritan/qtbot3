@@ -41,7 +41,7 @@ def cmdhook(regex: str):
     return wrapper
 
 
-def store_value(key: str, value) -> bool:
+def set_value(key: str, value) -> bool:
     try:
         url = 'http://127.0.0.1:4001/set/'
         data = json.dumps({'key': key, 'value': value})
@@ -53,13 +53,22 @@ def store_value(key: str, value) -> bool:
         return False
 
     except Exception as ex:
-        print("store_value() exception:", ex)
+        print("set_value() exception:", ex)
         return False
 
 
-def unstore_value(key: str) -> bool:
-    print("unstore_value is not implemented")
-    return False
+def unset_value(key: str) -> bool:
+    try:
+        url = 'http://127.0.0.1:4001/unset/'
+        data = json.dumps({'key': key})
+        headers = {'content-type': 'application/json'}
+        result = json.loads(requests.post(url, headers=headers, data=data).text)
+
+        return result['code'] == 200
+
+    except Exception as ex:
+        print("unset_value() exception:", ex)
+        return False
 
 
 def fetch_value(key: str):
@@ -102,7 +111,7 @@ def remember_user(fn):
     """Remember a user"""
 
     def wrapper(message: Message, nick: str):
-        store_value('user_' + message.user, message.nick)
+        set_value('user_' + message.user, message.nick)
         return fn(message, nick)
 
     return wrapper

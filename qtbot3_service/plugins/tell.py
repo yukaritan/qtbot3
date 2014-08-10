@@ -2,7 +2,7 @@ import json
 import time
 
 from util import irc
-from util.handler_utils import store_value, fetch_all, get_target, cmdhook, unstore_value
+from util.handler_utils import set_value, fetch_all, get_target, cmdhook, unset_value
 from util.message import Message
 from util.settings import get_setting
 
@@ -27,7 +27,7 @@ def handle_tell(message: Message, match, nick: str) -> str:
     for host in (k for k, v in hosts.items() if v == recipient):
         host = host.split('_', 1)[1]
         key = "tell_" + host + str(time.time())
-        store_value(key, message)
+        set_value(key, message)
 
     response = "okay, I will remember that until {nick} says \"{prefix}get told\""
     return irc.chat_message(target, response.format(nick=recipient, prefix=get_setting('cmd_prefix')))
@@ -40,7 +40,7 @@ def handle_get_told(message: Message, match, nick: str) -> str:
     target = get_target(message, nick)
     lines = []
     for key, nick_msg in messages.items():
-        unstore_value(key)
+        unset_value(key)
         nick, msg = tuple(json.loads(nick_msg))
         lines.append(message.nick + ': ' + nick + ' said ' + msg)
 

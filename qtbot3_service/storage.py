@@ -46,6 +46,15 @@ class Storage:
     def get_storage():
         return Storage._storage
 
+    @staticmethod
+    def unset_key(key: str):
+        print('unset_key("%s")' % key)
+        try:
+            del Storage._storage[key]
+            return create_response(True)
+        except Exception as ex:
+            return create_exception(ex)
+
 
 app = Flask(__name__)
 
@@ -60,6 +69,12 @@ def get_key():
 def set_key():
     data = request.get_json()
     return Storage.set_key(data['key'], data['value'])
+
+
+@app.route('/unset/', methods=['POST'])
+def unset_key():
+    data = request.get_json()
+    return Storage.unset_key(data['key'])
 
 
 @app.route('/dump/')
