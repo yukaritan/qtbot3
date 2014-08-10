@@ -1,7 +1,10 @@
 import re
 import json
 import requests
-from util.handler_utils import cmdhook, authenticate
+from util import irc
+
+from util.handler_utils import cmdhook, authenticate, get_target
+
 from util.message import Message
 
 
@@ -31,11 +34,12 @@ def handle_scrape(message: Message, match, nick: str):
     print("searching 4chan's {board} board for {filtertext}...".format(**match))
     baseurl = "http://boards.4chan.org/{board}/thread/{number}/{semantic_url}"
 
-    output = []
+    lines = []
 
     for number, thread in scrape(board, filtertext):
         title = (thread['sub'] + ': ' + baseurl).format(number=number, board=board, **thread)
-        output.append(title + ' - ' + thread['teaser'])
+        lines.append(title + ' - ' + thread['teaser'])
 
-    for line in output:
-        print(line)
+    target = get_target(message, nick)
+
+    return '\r\n'.join(irc.chat_message(target, line) for line in lines)
