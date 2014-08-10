@@ -4,6 +4,7 @@ import time
 from util import irc
 from util.handler_utils import store_value, fetch_all, get_target, cmdhook
 from util.message import Message
+from util.settings import get_setting
 
 
 @cmdhook('tell (?P<recipient>[^\s]+) (?P<message>.+)')
@@ -26,6 +27,9 @@ def handle_tell(message: Message, match, nick: str) -> str:
     for host in (k for k, v in hosts.items() if v == recipient):
         key = "tell_" + host + str(time.time())
         store_value(key, message)
+
+    response = "okay, I will remember that until {nick} says \"{prefix}get told\""
+    return irc.chat_message(target, response.format(nick=recipient, prefix=get_setting('cmd_prefix')))
 
 #
 # @cmdhook('get told')
