@@ -73,13 +73,19 @@ def fetch_value(key: str):
         return None
 
 
-def fetch_all():
+def fetch_all(keyfilter: str="", valuefilter: str=""):
     try:
         url = 'http://127.0.0.1:4001/getall/'
         result = json.loads(requests.get(url).text)
 
         if result['code'] == 200:
-            return result['payload']
+            lines = result['payload']
+            if keyfilter or valuefilter:
+                lines = {k: v for k, v in lines.items()
+                         if k.startswith(keyfilter)
+                         and v.startswith(valuefilter)}
+            return lines
+
         return None
 
     except Exception as ex:

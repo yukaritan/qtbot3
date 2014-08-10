@@ -1,5 +1,5 @@
-from util.handler_utils import cmdhook, authenticate
-from util.message import Message
+# from util.handler_utils import cmdhook, authenticate
+# from util.message import Message
 
 
 def load_plugin(name: str) -> bool:
@@ -16,6 +16,8 @@ def load_plugin(name: str) -> bool:
         return False
 
 
+# This didn't quite work as expected...
+#
 # @cmdhook('load_plugin (?P<plugin>[^\s]+)')
 # @authenticate
 # def handle_loadplugin(message: Message, match, nick: str):
