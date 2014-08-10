@@ -16,7 +16,7 @@ def load_plugin(name: str) -> bool:
         return False
 
 
-@cmdhook('load_plugin (<?P<plugin>[^\s]+)')
+@cmdhook('load_plugin (?P<plugin>[^\s]+)')
 @authenticate
 def handle_loadplugin(message: Message, match, nick: str):
     load_plugin(match['plugin'])
