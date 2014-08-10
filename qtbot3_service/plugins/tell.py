@@ -38,6 +38,10 @@ def handle_get_told(message: Message, match, nick: str) -> str:
     messages = fetch_all(keyfilter='tell_' + message.user)
 
     target = get_target(message, nick)
+
+    if not messages:
+        return irc.chat_message(target, "I have no messages for {nick} ;_;".format(nick=message.nick))
+
     lines = []
     for key, nick_msg in messages.items():
         unset_value(key)
