@@ -10,7 +10,7 @@ from util.message import Message
 def handle_tell(message: Message, match, nick: str) -> str:
 
     # get the host for a given nick
-    hosts = fetch_all(keyfilter='user_', valuefilter=match['nick'])
+    hosts = fetch_all(keyfilter='user_', valuefilter=match['recipient'])
 
     recipient = match['recipient']
 
