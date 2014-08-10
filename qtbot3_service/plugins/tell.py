@@ -35,6 +35,6 @@ def handle_tell(message: Message, match, nick: str) -> str:
 @cmdhook('get told')
 def handle_get_told(message: Message, match, nick: str) -> str:
 
-    messages = fetch_all(keyfilter='tell_', valuefilter=message.user)
+    messages = fetch_all(keyfilter='tell_'+message.user)
 
     print(messages)
