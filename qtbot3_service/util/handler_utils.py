@@ -57,6 +57,11 @@ def store_value(key: str, value) -> bool:
         return False
 
 
+def unstore_value(key: str) -> bool:
+    print("unstore_value is not implemented")
+    return False
+
+
 def fetch_value(key: str):
     try:
         url = 'http://127.0.0.1:4001/get/'

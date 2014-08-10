@@ -2,7 +2,7 @@ import json
 import time
 
 from util import irc
-from util.handler_utils import store_value, fetch_all, get_target, cmdhook
+from util.handler_utils import store_value, fetch_all, get_target, cmdhook, unstore_value
 from util.message import Message
 from util.settings import get_setting
 
@@ -35,7 +35,13 @@ def handle_tell(message: Message, match, nick: str) -> str:
 
 @cmdhook('get told')
 def handle_get_told(message: Message, match, nick: str) -> str:
-
     messages = fetch_all(keyfilter='tell_' + message.user)
 
-    print(messages)
+    target = get_target(message, nick)
+    lines = []
+    for key, nick_msg in messages.items():
+        unstore_value(key)
+        nick, msg = tuple(nick_msg)
+        lines.append(message.nick + ': ' + nick + ' said ' + msg)
+
+    return '\r\n'.join(irc.chat_message(target, line) for line in lines)
