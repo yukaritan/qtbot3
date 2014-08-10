@@ -25,6 +25,7 @@ def handle_tell(message: Message, match, nick: str) -> str:
     message = json.dumps([message.nick, match['message']])
 
     for host in (k for k, v in hosts.items() if v == recipient):
+        host = host.split('_', 1)[1]
         key = "tell_" + host + str(time.time())
         store_value(key, message)
 
@@ -35,6 +36,6 @@ def handle_tell(message: Message, match, nick: str) -> str:
 @cmdhook('get told')
 def handle_get_told(message: Message, match, nick: str) -> str:
 
-    messages = fetch_all()
+    messages = fetch_all(keyfilter='tell_' + message.user)
 
     print(messages)
