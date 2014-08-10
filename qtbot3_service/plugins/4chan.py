@@ -29,6 +29,11 @@ def handle_scrape(message: Message, match, nick: str):
     filtertext = match['filtertext']
 
     print("searching 4chan's {board} board for {filtertext}...".format(**match))
+    baseurl = "http://boards.4chan.org/{board}/thread/{number}/{semantic_url}"
 
-    for result in scrape(board, filtertext):
-        print(result)
+    for number, thread in scrape(board, filtertext):
+        url = baseurl.format(number=number, **thread)
+
+        print(thread['sub'], url)
+        print(thread['teaser'])
+        print()
