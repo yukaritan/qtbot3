@@ -31,7 +31,10 @@ def handle_tell(message: Message, match, nick: str) -> str:
     response = "okay, I will remember that until {nick} says \"{prefix}get told\""
     return irc.chat_message(target, response.format(nick=recipient, prefix=get_setting('cmd_prefix')))
 
-#
-# @cmdhook('get told')
-# def handle_get_told(message: Message, match, nick: str) -> str:
-#
+
+@cmdhook('get told')
+def handle_get_told(message: Message, match, nick: str) -> str:
+
+    messages = fetch_all(keyfilter='tell_', valuefilter=message.user)
+
+    print(messages)
