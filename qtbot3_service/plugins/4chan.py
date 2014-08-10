@@ -22,7 +22,7 @@ def scrape(board: str, filtertext: str):
         print("scraping exception:", ex)
 
 
-@cmdhook('4chan (?P<board>[a-z]{1,3}) (?P<filtertext>[.+])')
+@cmdhook('4chan (?P<board>.+[^\s]) (?P<filtertext>[.+])')
 @authenticate
 def handle_scrape(message: Message, match, nick: str):
     board = match['board']
