@@ -1,14 +1,8 @@
 import re
 import json
-
 import requests
-
-from util.handler_utils import cmdhook, authenticate, message_hooks
-
+from util.handler_utils import cmdhook, authenticate
 from util.message import Message
-
-
-print("loading 4chan plugin")
 
 
 def scrape(board: str, filtertext: str):
@@ -38,5 +32,3 @@ def handle_scrape(message: Message, match, nick: str):
 
     for result in scrape(board, filtertext):
         print(result)
-
-print(message_hooks)
