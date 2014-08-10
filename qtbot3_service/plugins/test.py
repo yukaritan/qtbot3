@@ -28,8 +28,11 @@ def get_host(message: Message, match, nick: str) -> str:
 
 @cmdhook('master')
 def get_master(message: Message, match, nick: str) -> str:
-    try:
-        target = get_target(message, nick)
-        return irc.chat_message(target, "my master is " + get_master_nick() or "unknown to me")
-    except Exception as ex:
-        print(ex)
+    target = get_target(message, nick)
+    return irc.chat_message(target, "my master is " + get_master_nick() or "unknown to me")
+
+
+@cmdhook('source')
+def get_master(message: Message, match, nick: str) -> str:
+    target = get_target(message, nick)
+    return irc.chat_message(target, "My source is available at https://github.com/yukaritan/qtbot3")
