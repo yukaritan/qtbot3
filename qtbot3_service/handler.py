@@ -52,9 +52,11 @@ def handle(data: str, nick: str) -> Message:
         match = regex.match(data)
         if match:
             try:
-                run_prehooks(data, nick)
+                output = []
+                output += run_prehooks(data, nick)
                 # noinspection PyCallingNonCallable
-                return hooks[name](Message(**match.groupdict()), nick)
+                output.append(hooks[name](Message(**match.groupdict()), nick))
+                return '\r\n'.join(output)
             except KeyError:
                 pass
 
