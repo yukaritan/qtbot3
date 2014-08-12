@@ -58,7 +58,9 @@ def handle(data: str, nick: str) -> Message:
                 print("run_prehooks result:", output)
 
                 # noinspection PyCallingNonCallable
-                output.append(hooks[name](Message(**match.groupdict()), nick))
+                result = hooks[name](Message(**match.groupdict()), nick)
+                if result:
+                    output.append(result)
 
                 print("output:", '\r\n'.join(output))
 
