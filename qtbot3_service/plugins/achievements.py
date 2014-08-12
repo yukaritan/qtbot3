@@ -13,7 +13,7 @@ def achievement_prehook(data: str, match: dict, nick: str):
         raw = get_value(key)
         count = (json.loads(raw) + 1) if raw else 1
         set_value(key, count)
-        print("Achievement progress for {host}: {count}".format(count=count, **match))
+        print("Achievement progress for {user}: {count}".format(count=count, **match))
 
     except Exception as ex:
         print("achievement prehook exception:", ex)
