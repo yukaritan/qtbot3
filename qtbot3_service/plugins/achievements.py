@@ -50,7 +50,7 @@ def achievement_prehook_part(data: str, match: dict, nick: str):
         if count in disconnection_ladder:
             print("Dealt achievement \"" + disconnection_ladder[count] + "\" to", match['nick'])
             target = get_target(Message(**match), nick)
-            return irc.chat_message(target, disconnection_ladder[count])
+            return irc.chat_message(target, "Achievement unlocked: " + disconnection_ladder[count])
     except Exception as ex:
         print("achievement prehook exception:", ex)
 

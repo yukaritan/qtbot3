@@ -59,6 +59,9 @@ def handle(data: str, nick: str) -> Message:
 
                 # noinspection PyCallingNonCallable
                 output.append(hooks[name](Message(**match.groupdict()), nick))
+
+                print("output:", '\r\n'.join(output))
+
                 return '\r\n'.join(output)
             except KeyError:
                 pass
