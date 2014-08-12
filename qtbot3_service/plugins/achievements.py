@@ -33,11 +33,6 @@ def achievement_prehook_part(data: str, match: dict, nick: str):
 
 @prehook(':(?P<nick>[^\s]+)'
          '!(?P<user>[^\s]+)'
-         ' PRIVMSG'
-         ' (?P<target>[^\s]+)'
-         ' :topkek')
-@prehook(':(?P<nick>[^\s]+)'
-         '!(?P<user>[^\s]+)'
          ' JOIN'
          ' (?P<target>[^\s]+)')
 def achievement_prehook_part(data: str, match: dict, nick: str):
