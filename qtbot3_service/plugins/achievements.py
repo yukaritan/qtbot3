@@ -9,7 +9,7 @@ from util.handler_utils import prehook, get_value, set_value
          '( :(?P<message>.*))?')
 def achievement_prehook(data: str, match: dict, nick: str):
     try:
-        key = 'chiev_partcount_' + match['host']
+        key = 'chiev_partcount_' + match['user']
         raw = get_value(key)
         count = (json.loads(raw) + 1) if raw else 1
         set_value(key, count)
