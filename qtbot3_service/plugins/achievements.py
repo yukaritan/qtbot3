@@ -21,7 +21,7 @@ def get_achievement(match: dict, nick: str, count: int) -> str:
     if count in disconnection_ladder:
         print("Dealt achievement \"" + disconnection_ladder[count] + "\" to", match['nick'])
 
-        if match['target'] is None:
+        if not 'target' in match or match['target'] is None:
             return
 
         target = get_target(Message(**match), nick)
