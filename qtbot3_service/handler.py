@@ -1,5 +1,5 @@
 import util.irc as irc
-from util.handler_utils import hook, hooks, message_hooks, remember_user, get_master_nick, ignore_self
+from util.handler_utils import hook, hooks, message_hooks, remember_user, get_master_nick, ignore_self, run_prehooks
 from util.linetypes import LINE_TYPES
 from util.message import Message
 from util.plugin_loader import load_plugin
@@ -44,6 +44,7 @@ def handle(data: str, nick: str) -> Message:
         match = regex.match(data)
         if match:
             try:
+                run_prehooks(data, nick)
                 # noinspection PyCallingNonCallable
                 return hooks[name](Message(**match.groupdict()), nick)
             except KeyError:

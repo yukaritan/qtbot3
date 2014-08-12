@@ -8,6 +8,7 @@ from util.settings import get_setting
 
 
 hooks = {}
+prehooks = OrderedDict()
 message_hooks = OrderedDict()
 
 
@@ -26,6 +27,16 @@ def msghook(regex: str):
 
     def wrapper(fn):
         message_hooks[re.compile(regex, re.IGNORECASE)] = fn
+        return fn
+
+    return wrapper
+
+
+def prehook(regex: str):
+    """Hook a function before it's passed down to message_hooks (or whatever else it might be going to)"""
+
+    def wrapper(fn):
+        prehooks[re.compile(regex, re.IGNORECASE)] = fn
         return fn
 
     return wrapper
@@ -168,3 +179,15 @@ def is_mentioned(message: Message, nick: str) -> bool:
         return True
 
     return False
+
+
+def run_prehooks(data: str, nick: str):
+    for regex, function in prehooks:
+        match = regex.match(data)
+        if match:
+            try:
+                function(data, match.groupdict(), nick)
+            except Exception as ex:
+                print("run_prehooks exception:", ex)
+
+
