@@ -18,6 +18,10 @@ disconnection_ladder = {
 
 @prehook(':(?P<nick>[^\s]+)'
          '!(?P<user>[^\s]+)'
+         ' QUIT'
+         '( :(?P<message>.*))?')
+@prehook(':(?P<nick>[^\s]+)'
+         '!(?P<user>[^\s]+)'
          ' PART'
          ' (?P<target>[^\s]+)'
          '( :(?P<message>.*))?')
