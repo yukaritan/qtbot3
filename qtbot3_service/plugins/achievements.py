@@ -43,7 +43,10 @@ def achievement_prehook_part(data: str, match: dict, nick: str):
 def achievement_prehook_part(data: str, match: dict, nick: str):
     try:
         key = 'chiev_partcount_' + match['user']
-        count = get_value(key)
+        count = get_value(key) or 0
+
+        print("Achievement progress for {user}: {count}".format(count=count, **match))
+
         if count in disconnection_ladder:
             print("Dealt achievement \"", disconnection_ladder[count], "\" to", match['nick'])
             target = get_target(Message(**match), nick)
