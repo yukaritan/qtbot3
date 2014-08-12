@@ -10,8 +10,7 @@ from util.handler_utils import prehook, get_value, set_value
 def achievement_prehook(data: str, match: dict, nick: str):
     try:
         key = 'chiev_partcount_' + match['user']
-        raw = get_value(key)
-        count = (json.loads(raw) + 1) if raw else 1
+        count = get_value(key) or 1
         set_value(key, count)
         print("Achievement progress for {user}: {count}".format(count=count, **match))
 
