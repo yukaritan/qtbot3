@@ -192,5 +192,5 @@ def run_prehooks(data: str, nick: str):
                     output.append(result)
             except Exception as ex:
                 print("run_prehooks exception:", ex)
-
+    return output
 
