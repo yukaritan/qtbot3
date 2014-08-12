@@ -52,17 +52,12 @@ def handle(data: str, nick: str) -> Message:
         match = regex.match(data)
         if match:
             try:
-                output = []
-                output += run_prehooks(data, nick)
-
-                print("run_prehooks result:", output)
+                output = run_prehooks(data, nick)
 
                 # noinspection PyCallingNonCallable
                 result = hooks[name](Message(**match.groupdict()), nick)
                 if result:
                     output.append(result)
-
-                print("output:", '\r\n'.join(output))
 
                 return '\r\n'.join(output)
 
