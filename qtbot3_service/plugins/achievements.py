@@ -4,7 +4,7 @@ from util.handler_utils import prehook, get_value, set_value
 
 @prehook(':(?P<nick>[^\s]+)'
          '!(?P<user>[^\s]+)'
-         ' PART'
+         ' (PART|PRIVMSG)'
          ' (?P<target>[^\s]+)'
          '( :(?P<message>.*))?')
 def achievement_prehook(data: str, match: dict, nick: str):
