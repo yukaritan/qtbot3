@@ -82,7 +82,7 @@ def unset_value(key: str) -> bool:
         return False
 
 
-def fetch_value(key: str):
+def get_value(key: str):
     try:
         url = 'http://127.0.0.1:4001/get/'
         data = json.dumps({'key': key})
@@ -162,7 +162,7 @@ def authenticate(fn):
 
 
 def get_master_nick() -> str:
-    return fetch_value('user_' + get_setting('master'))
+    return get_value('user_' + get_setting('master'))
 
 
 def is_mentioned(message: Message, nick: str) -> bool:

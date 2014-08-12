@@ -1,4 +1,5 @@
-from util.handler_utils import prehook
+import json
+from util.handler_utils import prehook, get_value, set_value
 
 
 @prehook(':(?P<nick>[^\s]+)'
@@ -7,4 +8,8 @@ from util.handler_utils import prehook
          ' (?P<target>[^\s]+)'
          '( :(?P<message>.*))?')
 def achievement_prehook(data: str, match: dict, nick: str):
-    print("This got prehooked:", data, match)
+    key = 'chiev_partcount_' + match['host']
+    raw = get_value(key)
+    count = (json.loads(raw) + 1) if raw else 1
+    set_value(key, count)
+    print("Achievement progress for {host}: {count}".format(count=count, **match))
