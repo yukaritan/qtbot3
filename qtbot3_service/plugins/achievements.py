@@ -42,7 +42,12 @@ def get_achievement(match: dict, nick: str, count: int) -> str:
 def achievement_prehook_part(data: str, match: dict, nick: str):
     try:
         key = 'chiev_partcount_' + match['user']
+
+        print("old value:", get_value(key))
         count = (get_value(key) or 0) + 1
+
+        print("new value:", count)
+
         set_value(key, count)
         return get_achievement(match, nick, count)
 
