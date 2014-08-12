@@ -20,6 +20,10 @@ def get_achievement(match: dict, nick: str, count: int) -> str:
     print("Achievement progress for {user}: {count}".format(count=count, **match))
     if count in disconnection_ladder:
         print("Dealt achievement \"" + disconnection_ladder[count] + "\" to", match['nick'])
+
+        if match['target'] is None:
+            return
+
         target = get_target(Message(**match), nick)
         msg = "{nick} has unlocked an achievement: {desc}"
         return irc.chat_message(target, msg.format(nick=match['nick'], desc=disconnection_ladder[count]))
