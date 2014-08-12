@@ -182,6 +182,7 @@ def is_mentioned(message: Message, nick: str) -> bool:
 
 
 def run_prehooks(data: str, nick: str):
+    print("run_prehooks is running")
     for regex, function in prehooks:
         match = regex.match(data)
         if match:
