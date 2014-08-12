@@ -16,6 +16,16 @@ disconnection_ladder = {
 }
 
 
+def get_achievement(match: dict, nick: str, count: int) -> str:
+    print("Achievement progress for {user}: {count}".format(count=count, **match))
+    if count in disconnection_ladder:
+        print("Dealt achievement \"" + disconnection_ladder[count] + "\" to", match['nick'])
+        target = get_target(Message(**match), nick)
+        msg = "{nick} has unlocked an achievement: {desc}"
+        return irc.chat_message(target, msg.format(nick=match['nick'], desc=disconnection_ladder[count]))
+    return None
+
+
 @prehook(':(?P<nick>[^\s]+)'
          '!(?P<user>[^\s]+)'
          ' QUIT'
@@ -30,7 +40,8 @@ def achievement_prehook_part(data: str, match: dict, nick: str):
         key = 'chiev_partcount_' + match['user']
         count = (get_value(key) + 1) or 1
         set_value(key, count)
-        print("Achievement progress for {user}: {count}".format(count=count, **match))
+        return get_achievement(match, nick, count)
+
     except Exception as ex:
         print("achievement prehook exception:", ex)
 
@@ -43,15 +54,7 @@ def achievement_prehook_part(data: str, match: dict, nick: str):
     try:
         key = 'chiev_partcount_' + match['user']
         count = get_value(key) or 0
+        return get_achievement(match, nick, count)
 
-        print("Achievement progress for {user}: {count}".format(count=count, **match))
-
-        if count in disconnection_ladder:
-            print("Dealt achievement \"" + disconnection_ladder[count] + "\" to", match['nick'])
-            target = get_target(Message(**match), nick)
-            msg = "{nick} has unlocked an achievement: {desc}"
-            return irc.chat_message(target, msg.format(nick=match['nick'], desc=disconnection_ladder[count]))
     except Exception as ex:
         print("achievement prehook exception:", ex)
-
-
