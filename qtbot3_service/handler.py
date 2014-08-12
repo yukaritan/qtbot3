@@ -34,6 +34,14 @@ def handle_notice(message: Message, nick: str):
 
 
 #
+#  Plugins
+#
+
+for plugin in get_setting('plugins'):
+    load_plugin(plugin)
+
+
+#
 #  The only function you should ever have to call
 #
 
@@ -54,11 +62,3 @@ def handle(data: str, nick: str) -> Message:
             return
 
     return None
-
-
-#
-#  Plugins
-#
-
-for plugin in get_setting('plugins'):
-    load_plugin(plugin)
