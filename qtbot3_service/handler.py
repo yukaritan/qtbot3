@@ -63,8 +63,12 @@ def handle(data: str, nick: str) -> Message:
                 print("output:", '\r\n'.join(output))
 
                 return '\r\n'.join(output)
+
             except KeyError:
                 pass
+
+            except Exception as ex:
+                print("handle() exception:", ex)
 
             print('no hooks found for %s.' % name, 'called with:', match.groupdict())
             return
