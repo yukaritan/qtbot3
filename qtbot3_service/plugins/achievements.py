@@ -1,6 +1,6 @@
 from util import irc
 from util.garbage import rainbow
-from util.handler_utils import prehook, get_value, set_value, get_target
+from util.handler_utils import prehook, get_value, set_value, get_target, cmdhook
 from util.message import Message
 
 
@@ -69,3 +69,12 @@ def achievement_prehook_part(data: str, match: dict, nick: str):
 
     except Exception as ex:
         print("achievement prehook exception:", ex)
+
+
+@cmdhook('disconnection achievement cheat')
+def achievement_cheat_codes(message: Message, match, nick: str) -> str:
+    target = get_target(message, nick)
+    key = 'chiev_partcount_' + match['user']
+    count = get_value(key) or 0
+    msg = rainbow("%s have disconnected %d times" % (match['nick'], count))
+    return irc.chat_message(target, msg)
