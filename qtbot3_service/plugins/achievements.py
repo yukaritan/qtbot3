@@ -76,5 +76,5 @@ def achievement_cheat_codes(message: Message, match, nick: str) -> str:
     target = get_target(message, nick)
     key = 'chiev_partcount_' + message.user
     count = get_value(key) or 0
-    msg = rainbow("%s have disconnected %d times" % (message.nick, count))
+    msg = rainbow("%s has disconnected %d times" % (message.nick, count))
     return irc.chat_message(target, msg)
