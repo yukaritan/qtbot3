@@ -22,7 +22,7 @@ def handle_message(message: Message, nick: str):
                 return function(message, match.groupdict(), nick)
 
     except Exception as ex:
-        print('handle_message exeption:', ex)
+        print('handle_message exception:', ex)
 
 
 @hook('notice')
