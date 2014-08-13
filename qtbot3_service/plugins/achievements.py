@@ -73,11 +73,8 @@ def achievement_prehook_part(data: str, match: dict, nick: str):
 
 @cmdhook('disconnection achievement cheat')
 def achievement_cheat_codes(message: Message, match, nick: str) -> str:
-
-    print(match)
-
     target = get_target(message, nick)
-    key = 'chiev_partcount_' + match['host']
+    key = 'chiev_partcount_' + message.user
     count = get_value(key) or 0
-    msg = rainbow("%s have disconnected %d times" % (match['nick'], count))
+    msg = rainbow("%s have disconnected %d times" % (message.nick, count))
     return irc.chat_message(target, msg)
