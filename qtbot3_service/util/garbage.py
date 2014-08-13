@@ -11,3 +11,13 @@ def repeat(items) -> str:
     while True:
         for item in items:
             yield item
+
+
+def rainbow(text: str) -> str:
+    """Color every character"""
+    return ''.join(a + b for a, b in zip(repeat(colors), text))
+
+
+def wrainbow(text: str) -> str:
+    """Color every word"""
+    return ' '.join(a + b for a, b in zip(repeat(colors), text.split(' ')))

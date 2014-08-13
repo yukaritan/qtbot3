@@ -1,4 +1,5 @@
 from util import irc
+from util.garbage import rainbow
 from util.handler_utils import prehook, get_value, set_value, get_target
 from util.message import Message
 
@@ -26,7 +27,8 @@ def get_achievement(match: dict, nick: str, count: int) -> str:
 
         target = get_target(Message(**match), nick)
         msg = "{nick} has unlocked an achievement: {desc}"
-        return irc.chat_message(target, msg.format(nick=match['nick'], desc=disconnection_ladder[count]))
+        msg = rainbow(msg.format(nick=match['nick'], desc=disconnection_ladder[count]))
+        return irc.chat_message(target, msg)
     return None
 
 
