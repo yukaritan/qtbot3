@@ -181,13 +181,13 @@ def is_mentioned(message: Message, nick: str) -> bool:
     return False
 
 
-def run_prehooks(data: str, nick: str):
+def run_prehooks(message: Message, data: str, nick: str):
     output = []
     for regex, function in prehooks.items():
         match = regex.match(data)
         if match:
             try:
-                result = function(data, match.groupdict(), nick)
+                result = function(message, match.groupdict(), nick)
                 if result:
                     output.append(result)
             except Exception as ex:

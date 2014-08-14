@@ -17,7 +17,7 @@ disconnection_ladder = {
 }
 
 
-def get_achievement(match: dict, nick: str, count: int) -> str:
+def get_achievement(message: Message, match: dict, nick: str, count: int) -> str:
     print("Achievement progress for {user}: {count}".format(count=count, **match))
     if count in disconnection_ladder:
         print("Dealt achievement \"" + disconnection_ladder[count] + "\" to", match['nick'])
@@ -25,7 +25,7 @@ def get_achievement(match: dict, nick: str, count: int) -> str:
         if not 'target' in match or match['target'] is None:
             return
 
-        target = get_target(Message(**match), nick)
+        target = get_target(message, nick)
         msg = "{nick} has unlocked an achievement: {desc}"
         msg = rainbow(msg.format(nick=match['nick'], desc=disconnection_ladder[count]))
         return irc.chat_message(target, msg)
@@ -41,7 +41,7 @@ def get_achievement(match: dict, nick: str, count: int) -> str:
          ' PART'
          ' (?P<target>[^\s]+)'
          '( :(?P<message>.*))?')
-def achievement_prehook_part(data: str, match: dict, nick: str):
+def achievement_prehook_part(message: Message, match: dict, nick: str):
     try:
         key = 'chiev_partcount_' + match['user']
 
@@ -51,7 +51,7 @@ def achievement_prehook_part(data: str, match: dict, nick: str):
         print("new value:", count)
 
         set_value(key, count)
-        return get_achievement(match, nick, count)
+        return get_achievement(message, match, nick, count)
 
     except Exception as ex:
         print("achievement prehook exception:", ex)
@@ -61,18 +61,18 @@ def achievement_prehook_part(data: str, match: dict, nick: str):
          '!(?P<user>[^\s]+)'
          ' JOIN'
          ' (?P<target>[^\s]+)')
-def achievement_prehook_part(data: str, match: dict, nick: str):
+def achievement_prehook_part(message: Message, match: dict, nick: str):
     try:
         key = 'chiev_partcount_' + match['user']
         count = get_value(key) or 0
-        return get_achievement(match, nick, count)
+        return get_achievement(message, match, nick, count)
 
     except Exception as ex:
         print("achievement prehook exception:", ex)
 
 
 @cmdhook('aimbot (?P<nick>[^\s]+)')
-def achievement_cheat_codes(message: Message, match, nick: str) -> str:
+def achievement_cheat_codes(message: Message, match: dict, nick: str) -> str:
     fetched = fetch_all(keyfilter='user_', valuefilter=match['nick'])
     target = get_target(message, nick)
 
