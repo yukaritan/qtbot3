@@ -189,7 +189,10 @@ def run_prehooks(message: Message, data: str, nick: str):
             try:
                 result = function(message, match.groupdict(), nick)
                 if result:
-                    output.append(result)
+                    if isinstance(result, list):
+                        output += result
+                    else:
+                        output.append(result)
             except Exception as ex:
                 print("run_prehooks exception:", ex)
     return output

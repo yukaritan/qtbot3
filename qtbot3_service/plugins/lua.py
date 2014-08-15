@@ -59,7 +59,7 @@ def lua_evalr(message: Message, match, nick: str) -> str:
     print("received lua code from {nick}: {code}".format(nick=nick, code=code))
     result = run_sandbox('function() return {code} end', code)
     target = get_target(message, nick)
-    return '\r\n'.join(chat_message(target, line) for line in result)
+    return [chat_message(target, line) for line in result]
 
 
 @cmdhook('eval (?P<code>.*)')
@@ -70,4 +70,4 @@ def lua_eval(message: Message, match, nick: str) -> str:
     print("received lua code from {nick}: {code}".format(nick=nick, code=code))
     result = run_sandbox('function() {code} end', code)
     target = get_target(message, nick)
-    return '\r\n'.join(chat_message(target, line) for line in result)
+    return [chat_message(target, line) for line in result]

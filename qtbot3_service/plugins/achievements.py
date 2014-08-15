@@ -61,7 +61,7 @@ def achievement_prehook_part(message: Message, match: dict, nick: str):
          '!(?P<user>[^\s]+)'
          ' JOIN'
          ' (?P<target>[^\s]+)')
-def achievement_prehook_part(message: Message, match: dict, nick: str):
+def achievement_prehook_join(message: Message, match: dict, nick: str):
     try:
         key = 'chiev_partcount_' + match['user']
         count = get_value(key) or 0

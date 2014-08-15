@@ -11,7 +11,7 @@ def join(message: Message, match, nick: str) -> str:
     lowmsg = message.message.lower()
 
     if not 'gnu/linux' in lowmsg and not 'gnu+linux' in lowmsg:
-        rant = '\r\n'.join(irc.chat_message(get_target(message, nick), line) for line in (
+        rant = [irc.chat_message(get_target(message, nick), line) for line in (
             "I'd just like to interject for moment. What you're refering to as Linux, is in fact, GNU/Linux, or as"
             " I've recently taken to calling it, GNU plus Linux. Linux is not an operating system unto itself,"
             " but rather another free component of a fully functioning GNU system made useful by the GNU corelibs,"
@@ -28,7 +28,7 @@ def join(message: Message, match, nick: str) -> str:
 
             "Linux is normally used in combination with the GNU operating system:"
             " the whole system is basically GNU with Linux added, or GNU/Linux."
-            " All the so-called Linux distributions are really distributions of GNU/Linux!"))
+            " All the so-called Linux distributions are really distributions of GNU/Linux!")]
 
         return rant
 

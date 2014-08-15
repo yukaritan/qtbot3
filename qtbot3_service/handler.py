@@ -7,7 +7,7 @@ from util.settings import get_setting
 
 
 #
-#  Hooks
+# Hooks
 #
 
 @hook('message')
@@ -29,8 +29,8 @@ def handle_message(message: Message, nick: str):
 @ignore_self
 def handle_notice(message: Message, nick: str):
     print('notice:', message.members)
-    return '\r\n'.join((irc.chat_message(get_master_nick(), 'I got a notice from %s:' % message.nick),
-                        irc.chat_message(get_master_nick(), message.message)))
+    return [irc.chat_message(get_master_nick(), 'I got a notice from %s:' % message.nick),
+            irc.chat_message(get_master_nick(), message.message)]
 
 
 #
@@ -58,7 +58,10 @@ def handle(data: str, nick: str) -> Message:
                 # noinspection PyCallingNonCallable
                 result = hooks[name](message, nick)
                 if result:
-                    output.append(result)
+                    if isinstance(result, list):
+                        output += result
+                    else:
+                        output.append(result)
 
                 return '\r\n'.join(output)
 

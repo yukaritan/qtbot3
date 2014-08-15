@@ -48,4 +48,4 @@ def handle_get_told(message: Message, match, nick: str) -> str:
         nick, msg = tuple(json.loads(nick_msg))
         lines.append(message.nick + ': ' + nick + ' said ' + msg)
 
-    return '\r\n'.join(irc.chat_message(target, line) for line in lines)
+    return [irc.chat_message(target, line) for line in lines]
