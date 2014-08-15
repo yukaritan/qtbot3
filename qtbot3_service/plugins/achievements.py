@@ -85,4 +85,4 @@ def achievement_cheat_codes(message: Message, match: dict, nick: str) -> str:
         msg = rainbow("%s has disconnected %d times" % (user, count))
         output.append(irc.chat_message(target, msg))
 
-    return '\r\n'.join(output)
+    return output
