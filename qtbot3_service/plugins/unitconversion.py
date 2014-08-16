@@ -57,7 +57,7 @@ def unit_convert(value: float, unit1: str, unit2: str) -> str:
          '(?P<unit2>[a-zA-Z_]+)')
 def handle_unit_convert(message: Message, match, nick: str) -> str:
     target = get_target(message, nick)
-    value, unit1, unit2 = float(match['value']), match['unit1'].lower(), match['unit2'].lower()
+    value, unit1, unit2 = float(match['value']), match['unit1'], match['unit2']
 
     # try to convert between units
     result = unit_convert(value, unit1, unit2)
