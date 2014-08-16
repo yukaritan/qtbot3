@@ -27,7 +27,7 @@ It connects to IRC. You need a couple more files for it to work.
                     "greetings",
                     "rainbow",
                     "test",
-                    "currency",
+                    "unitconversion",
                     "cleverbot"]
     }
     ```
@@ -39,7 +39,8 @@ It connects to IRC. You need a couple more files for it to work.
 4. Flask
 5. Lupa
 6. Cleverbot2
-7. Other things. Please let me know what it has you install.
+7. Pint
+And probably other things. Please let me know what it has you install.
 
 
 ## Run
