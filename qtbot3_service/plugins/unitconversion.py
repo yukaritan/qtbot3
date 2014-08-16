@@ -56,19 +56,21 @@ def handle_unit_convert(message: Message, match, nick: str) -> str:
     # try to convert between units
     result = unit_convert(value, unit1, unit2)
     if result:
-        output = "{value} {unit1} is {result}"
-        return irc.chat_message(target, output.format(value=value,
+        output = "{value} {unit1} is {result}".format(value=value,
                                                       result=result,
-                                                      unit1=unit1))
+                                                      unit1=unit1)
+        print(output)
+        return irc.chat_message(target, output)
 
     # try to convert currency
     result = currency_convert(value, unit1, unit2)
     if result:
-        output = "{value} {unit1} is {result} {unit2}"
-        return irc.chat_message(target, output.format(value=value,
-                                                      result=result,
-                                                      unit1=unit1,
-                                                      unit2=unit2))
+        output = "{value} {unit1} is {result} {unit2}".format(value=value,
+                                                              result=result,
+                                                              unit1=unit1,
+                                                              unit2=unit2)
+        print(output)
+        return irc.chat_message(target, output)
 
     # well, that failed.
     output = "couldn't convert {unit1} to {unit2} ;__;".format(unit1=unit1, unit2=unit2)
