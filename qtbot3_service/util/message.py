@@ -1,9 +1,10 @@
 class Message:
-    def __init__(self, nick: str=None, target: str=None, user: str=None, message: str=None):
+    def __init__(self, nick: str=None, target: str=None, user: str=None, message: str=None, command: str=None):
         self._nick = nick
         self._target = target
         self._user = user
         self._message = message
+        self._command = command
 
     @property
     def nick(self) -> str:
