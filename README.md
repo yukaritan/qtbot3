@@ -42,6 +42,7 @@ It connects to IRC. You need a couple more files for it to work.
 5. Lupa
 6. Cleverbot2
 7. Pint
+
 And probably other things. Please let me know what it has you install.
 
 
