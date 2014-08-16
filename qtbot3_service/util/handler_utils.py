@@ -1,7 +1,9 @@
 from collections import OrderedDict
 import re
 import json
+
 import requests
+
 from util import irc
 from util.message import Message
 from util.settings import get_setting

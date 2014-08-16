@@ -1,10 +1,10 @@
 import re
 import json
+
 import requests
+
 from util import irc
-
 from util.handler_utils import cmdhook, authenticate, get_target
-
 from util.message import Message
 
 

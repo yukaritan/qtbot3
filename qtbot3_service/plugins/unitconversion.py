@@ -1,9 +1,12 @@
 import json
+
 import requests
+from pint import UnitRegistry, DimensionalityError, UndefinedUnitError
+
 from util import irc
 from util.handler_utils import msghook, get_target
 from util.message import Message
-from pint import UnitRegistry, DimensionalityError, UndefinedUnitError
+
 
 ureg = UnitRegistry()
 
@@ -68,10 +71,8 @@ def handle_unit_convert(message: Message, match, nick: str) -> str:
     # try to convert currency
     result = currency_convert(value, unit1, unit2)
     if result:
-        output = "{value} {unit1} is {result} {unit2}".format(value=value,
-                                                              result=result,
-                                                              unit1=unit1,
-                                                              unit2=unit2)
+        output = "{value} {unit1} is {result} {unit2}".format(value=value, result=result,
+                                                              unit1=unit1, unit2=unit2)
         print(output)
         return irc.chat_message(target, output)
 

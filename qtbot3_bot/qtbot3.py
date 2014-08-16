@@ -1,6 +1,7 @@
 from concurrent.futures import ThreadPoolExecutor
 import json
 import socket
+import threading
 import requests
 
 import sys
@@ -20,6 +21,7 @@ class Qtbot3:
         self._channels = []
         self._running = True
         self._debugmode = True
+        self._lock = threading.Lock()
 
     def debug(self, *args, **kw):
         """Prints a debug message if _debugmode is true"""
@@ -45,9 +47,10 @@ class Qtbot3:
 
     def send(self, message: str) -> None:
         """Accepts any string, puts the correct ending on, converts it to bytes, and sends it to the server"""
-        if not message.startswith('PONG'):
-            self.debug(" ->", message)
-        self._socket.send((message + "\r\n").encode())
+        with self._lock:
+            if not message.startswith('PONG'):
+                self.debug(" ->", message)
+            self._socket.send((message + "\r\n").encode())
 
     def say(self, target: str, message: str) -> None:
         """Sends message to target (target can be a user or a channel)"""
@@ -90,6 +93,8 @@ class Qtbot3:
             print('response:', response)
 
     def run(self):
+        print("Starting qtbot3...")
+        print("Connecting...")
         self.connect()
         with ThreadPoolExecutor(10) as tpe:
             while self._running:
@@ -104,7 +109,7 @@ class Qtbot3:
                         tpe.submit(self.outsource, data, self.nick)
                     except Exception as ex:
                         self.debug('failed to handle data:', ex)
-
+        print("Exiting")
     #
     # Properties
     #

@@ -1,5 +1,5 @@
 from flask import jsonify, make_response
-from .apiresponse import APIResponse
+from util.apiresponse import APIResponse
 
 
 def create_response(payload, error=False, exception=None, code=200):

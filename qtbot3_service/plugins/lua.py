@@ -1,9 +1,10 @@
 """This module is probably dangerous. Use at your own risk."""
 
-from util.irc import chat_message
-from util.handler_utils import authenticate, get_target, cmdhook, ignore_self
-from util.message import Message
 import lupa
+
+from util.irc import chat_message
+from util.handler_utils import authenticate, get_target, cmdhook
+from util.message import Message
 
 
 safe_lua_modules = [

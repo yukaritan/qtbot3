@@ -1,9 +1,9 @@
 import util.irc as irc
 from util.handler_utils import hook, hooks, message_hooks, remember_user, get_master_nick, ignore_self, run_prehooks
 from util.linetypes import LINE_TYPES
-from util.message import Message
 from util.plugin_loader import load_plugin
 from util.settings import get_setting
+from util.message import Message
 
 
 #

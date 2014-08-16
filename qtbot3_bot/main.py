@@ -1,21 +1,67 @@
 import sys
-from qtbot3 import Qtbot3
-
 
 sys.path.append('..')
-# noinspection PyUnresolvedReferences
-from qtbot3_service.util.apiresponse import APIResponse
-# noinspection PyUnresolvedReferences
+sys.path.append('../qtbot3_service')
+
+from qtbot3 import Qtbot3
+from qtbot3_service.util import irc
+
 from qtbot3_service.util.settings import get_setting
+from qtbot3_service.util.response import create_response, create_exception
+
+from flask import Flask, request
+from threading import Thread
 
 
-def test():
-    nick = get_setting('nick')
-    server = get_setting('server')
-    port = get_setting('port')
+print("Starting instance")
 
-    Qtbot3(nick, server, port).run()
+app = Flask(__name__)
+qtbot3 = Qtbot3(get_setting('nick'),
+                get_setting('server'),
+                get_setting('port'))
 
 
-if __name__ == '__main__':
-    test()
+@app.route('/say/', methods=['POST'])
+def handle_say():
+    data = request.get_json()
+    try:
+        message = irc.chat_message(target=data['target'], message=data['message'])
+        qtbot3.send(message)
+        return create_response("success")
+    except Exception as e:
+        return create_exception(e)
+
+
+@app.route('/join/', methods=['POST'])
+def handle_join():
+    data = request.get_json()
+    try:
+        qtbot3.send(irc.join_channel(channel=data['channel']))
+        return create_response("success")
+    except Exception as e:
+        return create_exception(e)
+
+
+@app.route('/part/', methods=['POST'])
+def handle_part():
+    data = request.get_json()
+    try:
+        qtbot3.send(irc.part_channel(channel=data['channel']))
+        return create_response("success")
+    except Exception as e:
+        return create_exception(e)
+
+
+@app.route('/raw/', methods=['POST'])
+def handle_raw():
+    data = request.get_json()
+    try:
+        qtbot3.send(data['raw'])
+        return create_response("success")
+    except Exception as e:
+        return create_exception(e)
+
+
+thread = Thread(target=qtbot3.run, daemon=True)
+thread.start()
+
