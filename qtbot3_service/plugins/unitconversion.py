@@ -39,7 +39,10 @@ def unit_convert(value: float, unit1: str, unit2: str) -> str:
         try:
             result = str(u1.to(u2) * value).replace('_', ' ')
             return result
-        except (DimensionalityError, UndefinedUnitError) as e:
+        except DimensionalityError as e:
+            print(e)
+            return None
+        except UndefinedUnitError as e:
             print(e)
             return None
 
