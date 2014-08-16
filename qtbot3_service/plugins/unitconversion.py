@@ -37,7 +37,7 @@ def unit_convert(value: float, unit1: str, unit2: str) -> str:
         u2 = ureg.__getattr__(unit2)
 
         try:
-            result = str(u1.to(u2) * value)
+            result = str(u1.to(u2) * value).replace('_', ' ')
             return result
         except (DimensionalityError, UndefinedUnitError) as e:
             print(e)
