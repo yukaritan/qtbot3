@@ -64,4 +64,3 @@ def handle_raw():
 
 thread = Thread(target=qtbot3.run, daemon=True)
 thread.start()
-

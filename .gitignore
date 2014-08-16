@@ -3,6 +3,7 @@ settings.json
 storage.json
 .idea/
 qtbot3_service/plugins/airing.py
+test.py
 
 # Created by .gitignore support plugin (hsz.mobi)
 ### Python template
