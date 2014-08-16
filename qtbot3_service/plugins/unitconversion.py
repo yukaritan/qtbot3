@@ -41,7 +41,7 @@ def unit_convert(value: float, unit1: str, unit2: str) -> str:
             return result
         except DimensionalityError as e:
             print(e)
-            return None
+            return str(e)
         except UndefinedUnitError as e:
             print(e)
             return None
