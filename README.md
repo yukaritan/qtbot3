@@ -10,6 +10,8 @@ It connects to IRC. You need a couple more files for it to work.
         "port": 6667,
         "service_host": "localhost",
         "service_port": 4000
+        "listen_host": "localhost",
+        "listen_port": 4000
     }
     ```
 
