@@ -38,7 +38,10 @@ def unit_convert(value: float, unit1: str, unit2: str) -> str:
 
         try:
             result = str(u1.to(u2) * value).replace('_', ' ')
-            return result
+            output = "{value} {unit1} is {result}".format(value=value,
+                                                          result=result,
+                                                          unit1=unit1)
+            return output
         except DimensionalityError as e:
             print(e)
             return str(e)
@@ -59,11 +62,8 @@ def handle_unit_convert(message: Message, match, nick: str) -> str:
     # try to convert between units
     result = unit_convert(value, unit1, unit2)
     if result:
-        output = "{value} {unit1} is {result}".format(value=value,
-                                                      result=result,
-                                                      unit1=unit1)
-        print(output)
-        return irc.chat_message(target, output)
+        print(result)
+        return irc.chat_message(target, result)
 
     # try to convert currency
     result = currency_convert(value, unit1, unit2)
