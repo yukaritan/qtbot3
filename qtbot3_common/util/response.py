@@ -1,5 +1,5 @@
 from flask import jsonify, make_response
-from util.apiresponse import APIResponse
+from qtbot3_common.util.apiresponse import APIResponse
 
 
 def create_response(payload, error=False, exception=None, code=200):

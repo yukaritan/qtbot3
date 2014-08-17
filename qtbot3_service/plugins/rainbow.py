@@ -1,7 +1,7 @@
 from util import irc
 from util.garbage import rainbow as _rainbow, wrainbow as _wrainbow
 from util.handler_utils import cmdhook, get_target
-from util.message import Message
+from qtbot3_common.types.message import Message
 
 
 @cmdhook('rainbow (?P<message>.*)')

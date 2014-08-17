@@ -4,7 +4,7 @@ import lupa
 
 from util.irc import chat_message
 from util.handler_utils import authenticate, get_target, cmdhook
-from util.message import Message
+from qtbot3_common.types.message import Message
 
 
 safe_lua_modules = [

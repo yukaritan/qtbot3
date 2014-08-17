@@ -1,7 +1,7 @@
 from util import irc
 from util.garbage import rainbow
 from util.handler_utils import prehook, get_value, set_value, get_target, cmdhook, fetch_all
-from util.message import Message
+from qtbot3_common.types.message import Message
 
 
 disconnection_ladder = {

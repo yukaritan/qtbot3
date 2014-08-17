@@ -1,8 +1,8 @@
 # Just a toy example, it doesn't actually work.
 #
 # from util.handler_utils import prehook
-# from util.message import Message
-# from util.settings import get_setting
+# from qtbot3_common.util.message import Message
+# from qtbot3_common.util.settings import get_setting
 #
 #
 # @prehook('.*')

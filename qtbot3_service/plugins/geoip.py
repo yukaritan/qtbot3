@@ -4,7 +4,7 @@ import pygeoip
 
 from util import irc
 from util.handler_utils import cmdhook, fetch_all, get_target
-from util.message import Message
+from qtbot3_common.types.message import Message
 
 
 @cmdhook('country (?P<nick>[^\s]+)')

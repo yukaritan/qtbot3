@@ -3,8 +3,8 @@ import time
 
 from util import irc
 from util.handler_utils import set_value, fetch_all, get_target, cmdhook, unset_value
-from util.message import Message
-from util.settings import get_setting
+from qtbot3_common.types.message import Message
+from qtbot3_common.util.settings import get_setting
 
 
 @cmdhook('tell (?P<recipient>[^\s]+) (?P<message>.+)')

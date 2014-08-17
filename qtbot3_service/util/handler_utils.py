@@ -5,8 +5,8 @@ import json
 import requests
 
 from util import irc
-from util.message import Message
-from util.settings import get_setting
+from qtbot3_common.types.message import Message
+from qtbot3_common.util.settings import get_setting
 
 
 hooks = {}
@@ -198,4 +198,3 @@ def run_prehooks(message: Message, data: str, nick: str):
             except Exception as ex:
                 print("run_prehooks exception:", ex)
     return output
-

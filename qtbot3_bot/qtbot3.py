@@ -1,13 +1,14 @@
+import sys
+sys.path.append('..')
+
 from concurrent.futures import ThreadPoolExecutor
 import json
 import socket
 import threading
 import requests
 
-import sys
-sys.path.append('..')
 # noinspection PyUnresolvedReferences
-from qtbot3_service.util.settings import get_setting
+from qtbot3_common.util.settings import get_setting
 
 
 class Qtbot3:

@@ -1,7 +1,11 @@
 #!/usr/bin/env python3.4
+import sys
+sys.path.append('..')
+
 from flask import Flask, request
-from util.response import create_response
+from qtbot3_common.util.response import create_response
 import handler
+
 
 print("Starting instance")
 

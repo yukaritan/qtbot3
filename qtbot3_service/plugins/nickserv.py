@@ -1,7 +1,7 @@
 from util import irc
 from util.handler_utils import hook
-from util.message import Message
-from util.settings import get_setting
+from qtbot3_common.types.message import Message
+from qtbot3_common.util.settings import get_setting
 
 
 @hook('server_mode')

@@ -1,9 +1,12 @@
+import sys
+sys.path.append('..')
+
 import util.irc as irc
 from util.handler_utils import hook, hooks, message_hooks, remember_user, get_master_nick, ignore_self, run_prehooks
 from util.linetypes import LINE_TYPES
 from util.plugin_loader import load_plugin
-from util.settings import get_setting
-from util.message import Message
+from qtbot3_common.util.settings import get_setting
+from qtbot3_common.types.message import Message
 
 
 #

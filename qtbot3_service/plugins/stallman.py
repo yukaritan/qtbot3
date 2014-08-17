@@ -2,7 +2,7 @@
 
 from util import irc
 from util.handler_utils import msghook, get_target
-from util.message import Message
+from qtbot3_common.types.message import Message
 
 
 @msghook('.*linux.*')

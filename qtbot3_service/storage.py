@@ -1,6 +1,8 @@
 #!/usr/bin/env python3.4
 import json
+
 from flask import Flask, request
+
 from util.response import create_response, create_exception
 
 

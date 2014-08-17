@@ -1,12 +1,11 @@
 import sys
 
 sys.path.append('..')
-sys.path.append('../qtbot3_service')
 
 from qtbot3 import Qtbot3
 from qtbot3_service.util import irc
-from qtbot3_service.util.settings import get_setting
-from qtbot3_service.util.response import create_response, create_exception
+from qtbot3_common.util.settings import get_setting
+from qtbot3_common.util.response import create_response, create_exception
 
 from flask import Flask, request
 from threading import Thread

@@ -1,6 +1,6 @@
 from util import irc
 from util.handler_utils import get_target, fetch_all, get_master_nick, cmdhook
-from util.message import Message
+from qtbot3_common.types.message import Message
 
 
 @cmdhook('host (?P<nick>.*)')
