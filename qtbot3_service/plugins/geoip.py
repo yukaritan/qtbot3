@@ -13,11 +13,17 @@ def handle_country_request(message: Message, match: dict, nick: str) -> str:
     target = get_target(message, nick)
 
     output = []
-
-    msg = "{host} is from {country}"
+    msg = "{nick} ({host}) is from {country}"
     for key in fetched:
         host = key.split('@', 1)[1]
-        country = geoip.country_name_by_addr(host)
-        output.append(irc.chat_message(target, msg.format(host=host, country=country)))
+
+        try:
+            country = geoip.country_name_by_addr(host)
+            output.append(irc.chat_message(target, msg.format(host=host, country=country, nick=match['nick'])))
+        except Exception as e:
+            print(e)
+
+    if not output:
+        return irc.chat_message(target, "{nick} isn't on earth".format(nick=match['nick']))
 
     return output
