@@ -4,7 +4,7 @@ from util import irc
 from util.handler_utils import cmdhook, fetch_all, get_target, get_value
 from util.message import Message
 
-from collections import OrderedDict
+from collections import defaultdict
 
 
 @cmdhook('country (?P<nick>[^\s]+)')
@@ -14,7 +14,7 @@ def handle_country_request(message: Message, match: dict, nick: str) -> str:
     fetched = fetch_all(keyfilter='user_', valuefilter=match['nick'])
     target = get_target(message, nick)
 
-    counter = OrderedDict(int)
+    counter = defaultdict(int)
 
     msg = "{nick} ({host}) is from {country}"
     for key in fetched:
