@@ -24,6 +24,6 @@ def handle_country_request(message: Message, match: dict, nick: str) -> str:
             print(e)
 
     if not output:
-        return irc.chat_message(target, "{nick} isn't on earth".format(nick=match['nick']))
+        return irc.chat_message(target, "{nick} doesn't seem to be on earth".format(nick=match['nick']))
 
     return output
