@@ -5,7 +5,6 @@ sys.path.append('../qtbot3_service')
 
 from qtbot3 import Qtbot3
 from qtbot3_service.util import irc
-
 from qtbot3_service.util.settings import get_setting
 from qtbot3_service.util.response import create_response, create_exception
 
@@ -13,13 +12,33 @@ from flask import Flask, request
 from threading import Thread
 
 
+#
+#  This won't work at all standalone
+#
+
+if __name__ == '__main__':
+    print("Please run this behind a WSGI server")
+    exit(1)
+
 print("Starting instance")
+
+
+#
+#  Fire up a daemonized qtbot
+#
 
 app = Flask(__name__)
 qtbot3 = Qtbot3(get_setting('nick'),
                 get_setting('server'),
                 get_setting('port'))
+thread = Thread(target=qtbot3.run, daemon=True)
+thread.start()
 
+
+#
+#  Register a few simple ways into the bot
+#  so we can do some simple automation
+#
 
 @app.route('/say/', methods=['POST'])
 def handle_say():
@@ -60,7 +79,3 @@ def handle_raw():
         return create_response("success")
     except Exception as e:
         return create_exception(e)
-
-
-thread = Thread(target=qtbot3.run, daemon=True)
-thread.start()
