@@ -1,10 +1,10 @@
+from collections import defaultdict
+
 import pygeoip
 
 from util import irc
-from util.handler_utils import cmdhook, fetch_all, get_target, get_value
+from util.handler_utils import cmdhook, fetch_all, get_target
 from util.message import Message
-
-from collections import defaultdict
 
 
 @cmdhook('country (?P<nick>[^\s]+)')
