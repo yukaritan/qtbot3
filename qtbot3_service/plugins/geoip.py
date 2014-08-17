@@ -18,7 +18,9 @@ def handle_country_request(message: Message, match: dict, nick: str) -> str:
         host = key.split('@', 1)[1]
 
         try:
+            print("Looking up", host)
             country = geoip.country_name_by_addr(host)
+            print("It resolves to", country)
             output.append(irc.chat_message(target, msg.format(host=host, country=country, nick=match['nick'])))
         except Exception as e:
             print(e)
