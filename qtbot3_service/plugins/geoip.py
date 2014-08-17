@@ -39,7 +39,7 @@ def handle_country_request(message: Message, match: dict, nick: str) -> str:
 
     results = sorted(counter.items(), key=lambda it: it[1])
 
-    message = "{nick}'s hosts resolve to the following countries: ".format(nick=match['nick'])
+    message = "{nick}'s hosts resolve to ".format(nick=match['nick'])
     message += ', '.join("{0} {1} times".format(*result) for result in results)
 
     return irc.chat_message(target, message)
