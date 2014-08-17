@@ -16,7 +16,6 @@ def handle_country_request(message: Message, match: dict, nick: str) -> str:
 
     counter = defaultdict(int)
 
-    msg = "{nick} ({host}) is from {country}"
     for key in fetched:
         host = key.split('@', 1)[1]
 
