@@ -14,7 +14,7 @@ def join(message: Message, match, nick: str) -> str:
     target = get_target(message, nick)
 
     try:
-        result = json.loads(requests.get("http://localhost:9912/api/temp").text)
+        result = json.loads(requests.get("http://localhost:9912/api/temp").text)['payload']
 
         response = ', '.join("%s: %d" % kv for kv in result.items() if not kv[0] == 'average')
 
