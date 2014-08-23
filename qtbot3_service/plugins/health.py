@@ -15,7 +15,10 @@ def join(message: Message, match, nick: str) -> str:
 
     try:
         result = json.loads(requests.get("http://localhost:9912/api/temp").text)
-        return irc.chat_message(target, str(result['payload']))
+
+        response = ', '.join("%s: %d" % kv for kv in result.items() if not kv[0] == 'average')
+
+        return irc.chat_message(target, response)
 
     except Exception as ex:
         return irc.chat_message(target, str(ex))
