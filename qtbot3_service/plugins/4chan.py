@@ -41,4 +41,4 @@ def handle_scrape(message: Message, match, nick: str):
 
     target = get_target(message, nick)
 
-    return [irc.chat_message(target, line) for line in lines]
+    return [irc.chat_message(target, line) for line in lines[:3]]
